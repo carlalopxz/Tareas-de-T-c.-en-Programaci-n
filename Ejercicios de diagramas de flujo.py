@@ -152,3 +152,37 @@ c3 = 15
 finalScore = c1 + c2 + c3
 
 print('The final grade is: ' + str(finalScore) + '%')
+
+#EJERCICIO 11
+
+horasUsuario = 0
+minutosUsuario = 0 
+segundosUsuario = 0 
+
+print('Ingrese la cantidad de horas, minutos y segundos')
+horasUsuario = int(input())
+minutosUsuario = int(input())
+segundosUsuario = int(input())
+
+horas = horasUsuario * 3600
+minutos = minutosUsuario * 60
+segundos = segundosUsuario / 60
+
+tiempoTotal = horas + minutos + segundos
+
+print('la cantidad de segundos totales es de: ' , tiempoTotal)
+
+#EJERCICIO 12 
+
+x1 = 0
+x2 = 0 
+x3 = 0 
+
+print('Digite 3 numeros')
+x1 = int(input())
+x2 = int(input())
+x3 = int(input())
+
+MG = (x1*x2*x3)**(1/3)
+
+print('La media geometrica es de: ', MG)
