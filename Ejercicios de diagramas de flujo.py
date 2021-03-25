@@ -2,15 +2,6 @@
 
 #EJERCICIO 1
 
-#Declare dos variables llamadas numero1 y numero2 a las cuales les asigne el valor inicial 0.
-#Despues agregue dos funciones input y guarde el valor dentro de mis variables a las cuales les agregue la funcion
-#int para que el valor del input pasara de str a int
-#Despues defiini las funciones junto con sus argumentos que son mis dos variables y dentro de la funcion 
-#Declare una variable llamada resultado a la que le agregue lo que la funcion debe hacer y una funcion int
-#Para convertir esos argumentos de srt a int y pedi que la funcion me devuelva la variable resultado.
-#Despues fuera de la funcion la llame y puse un print con un str, llamando a la funcion para que se muestre 
-#en pantalla.
-
 number1 = 0 
 number2 = 0 
 
@@ -186,3 +177,66 @@ x3 = int(input())
 MG = (x1*x2*x3)**(1/3)
 
 print('La media geometrica es de: ', MG)
+
+#EJERCICIO 13 
+
+cantidadMujeres = 0 
+cantidadVarones = 0
+
+print('Digite la cantidad de alumnas mujeres y alumnos varones')
+cantidadMujeres = int(input())
+cantidadVarones = int(input())
+
+cantidadTotalAlumnos = cantidadMujeres + cantidadVarones
+
+porcentajeMujeres = (cantidadMujeres*100) / cantidadTotalAlumnos
+porcentajeVarones = (cantidadVarones*100) / cantidadTotalAlumnos
+
+print('el porcentaje de alumnas mujeres es de: ' + str(porcentajeMujeres) + 
+    '% y el porcentaje de alumnos varones es de: ' + str(porcentajeVarones) + '%')
+
+#EJERCICIO 14
+
+caraCubo = 0
+
+print('Digite el valor de la cara del cubo')
+caraCubo = int(input())
+
+volumen = caraCubo**3
+area = 6 * caraCubo**2
+
+print('El volumen del cubo es de: ' + str(volumen) +
+    ' y el area es de: ' + str(area))
+
+#EJERCICIO 15
+
+inversion1 = 0
+inversion2 = 0
+inversion3 = 0
+
+print('Ingrese el valor de las 3 inversiones')
+inversion1 = int(input())
+inversion2 = int(input())
+inversion3 = int(input())
+
+totalInversion = inversion1 + inversion2 + inversion3
+porcentaje1 = (inversion1*100) / totalInversion
+porcentaje2 = (inversion2*100) / totalInversion
+porcentaje3 = (inversion3*100) / totalInversion
+
+print('El porcentaje de la primera inversion es de: ' + str(porcentaje1) + '%')
+print('El porcentaje de la segunda inversion es de: ' + str(porcentaje2) + '%')
+print('El porcentaje de la tercera inversion es de: ' + str(porcentaje3) + '%')
+
+#EJERCICIO 16
+
+radioEsfera = 0
+
+print('Digite el valor del radio de la esfera')
+radioEsfera = int(input())
+
+area = 4 * 3.14 * radioEsfera**2
+volumen = (4/3) * 3.14 * radioEsfera**3
+
+print('El area de la esfera es de: ' + str(area))
+print('El volumen de la esfera es de: ' + str(volumen))
