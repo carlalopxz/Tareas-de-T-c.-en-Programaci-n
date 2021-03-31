@@ -42,9 +42,9 @@ if x == y and x == z:
 
 #OPCION 3
 
-num1 = int(input())
-num2 = int(input())
-num3 = int(input())
+num1 = int(input('Ingrese un número \n')) #\n es salto de linea
+num2 = int(input('Ingrese un número \n'))
+num3 = int(input('Ingrese un número \n'))
 
 if num1 > num2 and num1 > num3:
     if num2 > num3:
