@@ -18,9 +18,9 @@ else:
         unidad = num - decena*10
         print(unidad,decena)
     elif num < 1000:
-        centena = num // 100
-        decena = (num - centena*100)//10
-        unidad = (num - decena*10)-100
+        centena = num  // 100 
+        decena = (num - centena*100) // 10
+        unidad = num - centena*100 - decena*10
         print(unidad,decena,centena)
     elif num < 10000:
         unidadMil = num // 1000
