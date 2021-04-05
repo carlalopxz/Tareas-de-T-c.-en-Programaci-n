@@ -10,7 +10,7 @@ if num < 0 or num > 9999:
     print('numero invalido')
 else:
     if num < 10:
-        print('El numero ' + str(num) + ' no es capicua')
+        print('El numero ' + str(num) + ' es capicua')
     elif num < 100:
         decena = num // 10
         unidad = num - decena*10
@@ -26,7 +26,7 @@ else:
             print('El numero ' + str(num) + ' es capicua')
         else:
             print('El numero ' + str(num) + ' no es capicua')
-    elif num < 10000:
+    else: #elif num < 10000:
         unidadMil = num // 1000
         centena = (num - unidadMil*1000)//100
         decena = (num - (unidadMil * 1000) - (centena * 100)) // 10
