@@ -3,7 +3,7 @@
 
 num = int(input('Digite un numero del 0 al 10 \n'))
 
-if num < 0 and num > 10:
+if num < 0 or num > 10:
     print('Numero invalido')
 elif num == 0:
     print('CERO')

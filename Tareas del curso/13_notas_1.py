@@ -9,7 +9,7 @@
 
 nota = int(input('Digite una nota de 0 a 10 \n'))
 
-if nota < 0 and nota > 10:
+if nota < 0 or nota > 10:
     print('Numeros invalidos')
 else:
     if nota == 10:
