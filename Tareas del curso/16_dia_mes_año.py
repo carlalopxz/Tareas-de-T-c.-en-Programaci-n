@@ -19,4 +19,4 @@ elif mes <= 0 or mes >= 13:
 else:
     1 >= dia <= 30
     1 >= mes <= 12
-    print(str(dia) + '/' +  str(mes) + '/' + str(año))
+    print(str(dia) + '/' +  str(mes) + '/' + str(año) + ': La fecha es correcta')
