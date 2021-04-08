@@ -1,4 +1,4 @@
-#Ejercicio10.Pedir una nota de 0 a 10 y mostrarla de la forma: 
+#Pedir una nota de 0 a 10 y mostrarla de la forma: 
 #Insuficiente,Regular, Bien, Muy Bien, Sobresaliente.
 
 #10 = sobresaliente

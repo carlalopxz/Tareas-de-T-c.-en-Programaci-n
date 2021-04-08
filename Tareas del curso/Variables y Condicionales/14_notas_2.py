@@ -1,4 +1,4 @@
-#Ejercicio11.Pedir una nota numérica entera entre 0 y 10, y mostrar dicha nota de la forma: 
+#Pedir una nota numérica entera entre 0 y 10, y mostrar dicha nota de la forma: 
 #cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez.
 
 num = int(input('Digite un numero del 0 al 10 \n'))
