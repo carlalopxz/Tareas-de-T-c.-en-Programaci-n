@@ -119,7 +119,6 @@ else:
             diasTotales = mesC + diasC
             print(f'Los dias de diferencia son: {diasTotales}')
         else:
-            añoC = (añoB -añoA) * 365
             mesC = (mesB - mesA) * 28
             diasC = diaB - diaA
             diasTotales = mesC + diasC + añoC
