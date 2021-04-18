@@ -22,3 +22,19 @@ while num_adivinar != 50:
         
 else:
     print('El numero ingresado es 50, acertaste!! :D')    
+
+#Opcion 2
+
+import random
+adivinar = random.randint(1,100) #generar un número entre 1 y 100
+
+while True:
+    n=int (input('Adivina que numero estoy pensando: \n'))
+    if n > adivinar:
+        print('El numero es alto')
+    elif n < adivinar:
+        print ('El numero es bajo')
+    else:
+        print ('E numero es correcto!!!! Ganaste el juego')
+        break
+print('Print del programa')
