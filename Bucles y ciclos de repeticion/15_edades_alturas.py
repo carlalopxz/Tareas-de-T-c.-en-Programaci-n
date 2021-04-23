@@ -4,10 +4,8 @@
 # y la cantidad de alumnos que miden más de 1.75m. (175cm)
 
 edadMedia = 0
-contEdad = 0
 
 alturaMedia = 0
-contAltura = 0
 
 mayoresA18 = 0
 mayoresDe175 = 0
@@ -17,10 +15,8 @@ for i in range(5):
     alturas = float(input('Ingrese las estaturas \n'))
     
     edadMedia = edadMedia + edades
-    contEdad = contEdad + 1
     
     alturaMedia = alturaMedia + alturas
-    contAltura = contAltura + 1
 
     if edades > 18:
         mayoresA18 = mayoresA18 + 1
@@ -28,8 +24,8 @@ for i in range(5):
     if alturas > 1.75:
         mayoresDe175 = mayoresDe175 + 1
 
-print('La edad media es de: ' + str(edadMedia/contEdad))
-print('La estatura media es de: ' + str(alturaMedia/contAltura))
+print('La edad media es de: ' + str(edadMedia/5))
+print('La estatura media es de: ' + str(alturaMedia/5))
 
 print('La cantidad mayores a 18 son: ' + str(mayoresA18))
 print('La cantidad mayores a 1.75 son: ' + str(mayoresDe175))
