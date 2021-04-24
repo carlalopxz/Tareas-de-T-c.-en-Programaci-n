@@ -7,4 +7,4 @@ for i in range (15):
     suma = suma + num
     cont = cont + 1
 print(suma)
-print(suma/cont)
+print(suma/cont) #print(suma/15)
