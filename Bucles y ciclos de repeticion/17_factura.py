@@ -15,17 +15,21 @@
 
 fac600 = 0
 litros = 0
-facturacion = 0
-
+factTotal = 0
 for i in range(5):
-    facTtal = int(input('Ingrese la facturacion total'))
-    litVendidos = int(input('Ingrese la cantidad de litros vendidos'))
-    facturacion = facturacion + facTtal
-    litros = litros + litVendidos
+    print('Factura n°:', i+1)
+    codFac = int(input('Ingrese el codigo de la factura: '))
+    facXLitro = int(input('Ingrese la facturacion por litro: '))
+    litVendidos = int(input('Ingrese la cantidad de litros vendidos: '))
+    
+    factTotal = facXLitro * litVendidos
 
-    if facTtal > 600:
+    if codFac == 1:
+        litros = litros + litVendidos
+
+    if factTotal > 600:
         fac600 = fac600 + 1
 
-print('La facturacion total es de: ' + str(facturacion) + ' pesos.')
+print('La facturacion total es de: ' + str(factTotal) + ' pesos.')
 print('La cantidad de litros vendidos es de: ' + str(litros) + ' litros')
 print('La cantidad de facturas emitidas mayores a $600 son: ' + str(fac600))
