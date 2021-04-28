@@ -10,9 +10,11 @@
 def mostrarNum(num1,num2):
     for i in range(num1, num2 +1, 1):
         print(i)
-    
+
 num1 = int(input('Ingrese el primer numero \n'))
 num2 = int(input('Ingrese el segundo numero \n'))
 
-mostrarNum(num1,num2)
-
+if num1 > num2:
+    mostrarNum(num1,num2)
+if num1 < num2:
+    mostrarNum(num2,num1)
