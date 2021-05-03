@@ -3,14 +3,14 @@
 
 def numMax(num1,num2,num3):
 
-    if num1 and num2 > num3:
+    if num1 > num3 and num2 > num3:
         if num1 > num2:
             maximo = num1
             print('El maximo es: ' + str(maximo))
         else:
             maximo = num2
             print('El maximo es: ' + str(maximo))
-    elif num3 > num1 and num2:
+    elif num3 > num1 and num3 > num2:
         maximo = num3
         print('El maximo es: ' + str(maximo))
     else:
