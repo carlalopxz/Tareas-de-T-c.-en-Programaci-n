@@ -8,14 +8,24 @@
 #solamente tenemos tres oportunidades para intentarlo.
 
 def login(user,password):
-    
+    global intentos 
+    intentos = intentos + 1
     if user == 'usuario1' and password == 'asdasd':
-        True
+        return True
+    else:
+        return False 
 
-usuario = input('Ingrese su nombre de usuario \n')
-contrasenia = input('Ingrese su contraseña \n')
+intentos = 0
+maxIntentos = 3 
 
-if login(usuario,contrasenia):
-    print('Usuario y contraseña corecctos')
-else:
-    print('Usuario y contraseña incorrectos')
+for i in range(3):
+
+    usuario = input('Ingrese su nombre de usuario \n')
+    contrasenia = input('Ingrese su contraseña \n')
+
+    if login(usuario,contrasenia):
+        print('Usuario y contraseña correctos')
+        break
+    else:
+        print(f'Usuario y contraseña incorrectos, te quedan {maxIntentos - intentos} disponibles')   
+    

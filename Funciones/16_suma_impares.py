@@ -2,11 +2,11 @@
 
 def suma_impares():
     global n
-    suma = 1
-    for i in range(1,n+1,2):
+    suma = 0
+    for i in range(1,n,2):
         suma = suma + i
     return suma
 
-n = int(input('Ingres en número N \n'))  
+n = int(input('Ingrese en número N \n'))  
 
-print('La suma de los numeros impares es:'+str(suma_impares()))
+print('La suma de los numeros impares es: '+str(suma_impares()))
