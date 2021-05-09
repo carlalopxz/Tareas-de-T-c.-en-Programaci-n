@@ -4,18 +4,30 @@
 listaNum = []
 for i in range(5):
     listaNum.append(int(input('Ingrese un número \n')))
-    
-cont = 0
+
+cont_ceros = 0
+cont_positivos = 0
+cont_negativos = 0
 positivos = 0
 negativos = 0
 for i in listaNum:
     if i > 0:
         positivos = positivos + i
+        cont_positivos = cont_positivos + 1
     elif i < 0:
         negativos = negativos + i
+        cont_negativos = cont_negativos + 1
     else:
-        cont = cont + 1
+        cont_ceros = cont_ceros + 1
 
-print('La media de los números positivos es de: ' + str(positivos/5))
-print('La media de los números negativos es de: ' + str(negativos/5))
-print('La cantidad de ceros ingresados es de: ' + str(cont))
+media_positivos = 0
+media_negativos = 0
+
+if cont_positivos > 0:
+    media_positivos = positivos/cont_positivos
+elif cont_negativos > 0:
+    media_negativos = negativos/cont_negativos
+
+print('La media de los números positivos es de: ' + str(media_positivos))
+print('La media de los números negativos es de: ' + str(media_negativos))
+print('La cantidad de ceros ingresados es de: ' + str(cont_ceros))
