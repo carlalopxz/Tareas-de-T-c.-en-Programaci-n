@@ -10,6 +10,11 @@ lista_num = []
 for num in range(10):
     lista_num.append(int(input('Ingrese un número \n')))
 
-print(lista_num[0],lista_num[9],lista_num[1],lista_num[8],lista_num[2],lista_num[7],lista_num[3],lista_num[6],lista_num[4],lista_num[5])
+for i in range(5):
+    print(lista_num[i],lista_num[-i-1],end=' ')
 
-#Se puede hacer con un ciclo de repeticion 
+#En la primera vuelta lista_num[i] vale 0 y lista_num[-i-1] vale -1
+#En la segunda vuelta lista_num[i] vale 1 y lista_num[-i-1] vale -2
+#Y asi susesivamente 
+
+
