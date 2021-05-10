@@ -5,4 +5,5 @@ lista_num = []
 for i in range(5):
     lista_num.append(int(input('Ingrese un número \n')))
 
-    print()
+
+print(lista_num[4],lista_num[3],lista_num[2],lista_num[1],lista_num[0])
