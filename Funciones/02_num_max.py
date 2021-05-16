@@ -1,5 +1,5 @@
 # Diseñar una función que tenga como parámetros dos números, y 
-# que calcule el maximo entre 3 números. 
+# que calcule el maximo entre 2 números. 
 
 def numMax(num1,num2):
 

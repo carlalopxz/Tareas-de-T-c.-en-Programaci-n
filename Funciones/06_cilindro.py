@@ -12,7 +12,7 @@ def cilindro(radio,altura):
         a = math.pi * 2 * radio * altura
         v = math.pi * radio * altura 
     except:
-        print("Carla zorra")
+        print("Algo salio mal en el programa")
     else:
         print(f'El area del cilindro es de {a}')
         print(f'El volumen del cilindro es de {v}')
