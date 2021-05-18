@@ -16,14 +16,25 @@
 #False
 
 import random
-lista = []
-for i in range(5):
-    lista.append(random.randint(1,99))
-print(lista)
-for i in range(0,10,2):
-    if lista[i:i + 1] <= lista[i + 1 : i + 2]:
-        True
+listaNum = []
+for i in range(10):
+    listaNum.append(int(input()))#random.randint(1,9))
+print(listaNum)
+for i in range(len(listaNum)-1):
+    if listaNum[i] <= listaNum[i+1]:
+        creciente = True
     else:
-        False
-if lista[i:i + 1] <= lista[i : i + 2]:
-    print('La lista está en orden creciente')
+        creciente = False
+        break
+for i in range(len(listaNum)-1):
+    if listaNum[i] >= listaNum[i+1]:
+        decreciente = True
+    else:
+        decreciente = False
+        break
+if creciente:
+    print('La lista está ordenada de manera creciente.')
+if decreciente:
+    print('La lista está ordenada de manera decreciente.')
+if not creciente and not decreciente:
+    print('La lista está desordenada.')
