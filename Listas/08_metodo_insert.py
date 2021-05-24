@@ -4,7 +4,6 @@
 
 #lista.insert(posicion,valor)
 
-from typing import List
 
 listaNum = []
 for i in range(8):
