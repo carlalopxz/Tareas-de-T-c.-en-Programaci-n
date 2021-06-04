@@ -25,7 +25,7 @@ media_negativos = 0
 
 if cont_positivos > 0:
     media_positivos = positivos/cont_positivos
-elif cont_negativos > 0:
+if cont_negativos > 0:
     media_negativos = negativos/cont_negativos
 
 print('La media de los números positivos es de: ' + str(media_positivos))
