@@ -14,9 +14,10 @@ print("\033[H\033[J")
 '''
 
 print('BIENVENIDO A SU AGENDA')
-
-agenda = {'Juan Ignacio':1123942359, 'Mamá': 3454030985,'Rolando':1140272127,'Carina':1135642708,'May':1159555229}
+import pprint
+agenda = {'Juani':1123942359, 'Mamá': 3454030985,'Rolando':1140272127,'Carina':1135642708,'May':1159555229}
 while True:
+    
     opcion = input('Elija una opcion para continuar: \n A) Añadir/modificar \n B) Buscar \n C) Borrar \n D) Listar \n E) Quiero salir \n').lower()
 
     def opcion_add_modificar():
@@ -44,18 +45,16 @@ while True:
     def opcion_borrar():
         nombre_para_borrar = input('Ingrese un nombre: \n').capitalize()
         if nombre_para_borrar in agenda.keys():
-            print(agenda[nombre_para_borrar])
             opcion_borrar = input(f'Desea borar el nombre de {nombre_para_borrar}: \n A) SI \n B) NO \n' ).lower()
-            print(opcion_borrar)
             if opcion_borrar == 'si':
                 del agenda[nombre_para_borrar]
                 print('Contacto borrado')
-                print(agenda)
-            else:
-                print('No se encontro el contacto')
+
         else:
             print('No se encontro el contacto')
 
+    def opcion_listar():
+        pprint.pprint(agenda)
 
     if opcion == 'a':
         opcion_add_modificar()
@@ -64,6 +63,7 @@ while True:
     if opcion == 'c':
         opcion_borrar()
     if opcion == 'd':
-        pass #opcion_listar()
+        opcion_listar()
     if opcion == 'e':
         break
+   
