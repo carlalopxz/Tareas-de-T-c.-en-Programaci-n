@@ -8,16 +8,25 @@
 #mostramos "El valor está en la posicion 1"
 #buscamos = 11
 #mostramos "No se encontró ese valor en la lista"
-
+from random import randint
 listaNum = []
 for i in range(10):
-    listaNum.append(int(input('Ingrese un número entero\n')))
+    listaNum.append(randint(1,99)) #(int(input('Ingrese un número entero\n')))
 listaNum.sort()
 print(listaNum)
 numBuscado = int(input('Ingrese el valor que quiere buscar en la lista \n'))
+'''
 for j in range(len(listaNum)):
-        while listaNum[j] == numBuscado:
-            print('El número ',numBuscado, ' se encuentra en la posición ',j)
-        else:
-            print('No se encontro el valor buscado')
-            break
+    if listaNum[j] == numBuscado:
+        print('El número ',numBuscado, ' se encuentra en la posición ',j)
+    else:
+        print('No se encontro el valor buscado')
+'''
+#Solucion 2
+
+if numBuscado in listaNum:
+    posicion = listaNum.index(numBuscado)
+    print(f'El numero {numBuscado} esta en la posicion {posicion}')
+else:
+    print(f'El numero {numBuscado} no se encuentra')
+    

@@ -5,14 +5,14 @@
 #lista1 = [10,30,50,70,90,110,130,150,170,190]
 #lista2 = [2,4,6,8,10,12,14,16,18,20]
 #lista3 = [2,4,6,8,10,10,12,14,16,18,20,30,50,70,90,110,130,150,170,190]
-
+from random import randint 
 lista1 = []
 for i in range(10):
-    lista1.append(int(input('Ingrese un número entero\n')))
+    lista1.append(randint(1,99)) #(int(input('Ingrese un número entero\n')))
 print(lista1)
 lista2 = []
 for j in range(10):
-    lista2.append(int(input('Ingrese un número entero\n')))
+    lista2.append(randint(1,99)) #(int(input('Ingrese un número entero\n')))
 print(lista2)
 lista3 = lista1 + lista2
 lista3.sort()

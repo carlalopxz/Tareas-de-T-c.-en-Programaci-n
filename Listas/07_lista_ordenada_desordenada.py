@@ -18,23 +18,24 @@
 import random
 listaNum = []
 for i in range(10):
-    listaNum.append(int(input()))#random.randint(1,9))
+    listaNum.append(random.randint(1,9))
 print(listaNum)
-for i in range(len(listaNum)-1):
-    if listaNum[i] <= listaNum[i+1]:
+for i in range(len(listaNum)): #pasa el indice a i de 0 a x
+    if listaNum[i] <= listaNum[i+1]: # i = [0,1,2,3,4,5,6,7,8,9]
         creciente = True
     else:
-        creciente = False
-        break
+        creciente = False # si el indice primero es menor o igual al indice 
+                          #que le sigue devolvemos un creciente true si no un false
+        break #al primer false hacemos break
 for i in range(len(listaNum)-1):
     if listaNum[i] >= listaNum[i+1]:
         decreciente = True
     else:
         decreciente = False
         break
-if creciente:
+if creciente: #true
     print('La lista está ordenada de manera creciente.')
-if decreciente:
+if decreciente: #true
     print('La lista está ordenada de manera decreciente.')
-if not creciente and not decreciente:
+if not creciente and not decreciente: #false 
     print('La lista está desordenada.')

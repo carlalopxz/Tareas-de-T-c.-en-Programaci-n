@@ -12,17 +12,17 @@ for trimestre in range(3):
         ingresado = random.randint(1,10)# int(input('Ingrese la nota'))
         print('Ingrese la nota del alumno: '+str(ingresado))
         alumnos.append(ingresado)
-    print(alumnos)
     trimestres.append(alumnos)
-    alumnos = []
+    alumnos = [] #vacio lista alumnos para ingresar nuevas notas
     print(trimestres)
 
 #trimestres = [[1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5]]
 suma = 0
-for i in trimestres[0]:#[1, 2, 3, 4, 5]
-    suma = suma + i
-promedio = suma / 5
-print('EL promedio del primer trimestre es: ' + str(promedio))
+for trimestre in range(1,4):
+    for i in trimestres[trimestre -1]:#[1, 2, 3, 4, 5]
+        suma = suma + i
+    promedio = suma / 5
+    print(f'EL promedio del {trimestre}° trimestre es: {promedio}')
 
 
 alumnoPedido = int(input('De qué alumnos desea calcular el promedio: ')) #0

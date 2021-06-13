@@ -4,6 +4,6 @@
 cadena = input('Ingrese una cadena \n')
 print(cadena)
 diccLetras = {}
-for i in range(len(cadena)):
-    diccLetras[cadena] = i
+for i in cadena:
+    diccLetras[i] = cadena.count(i)
 print(diccLetras)

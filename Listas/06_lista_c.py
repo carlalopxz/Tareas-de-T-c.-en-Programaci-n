@@ -22,4 +22,6 @@ lista_C = []
 for i in range(0,10,3):
     lista_C.append(lista_A[i: i + 3])
     lista_C.append(lista_B[i: i + 3])
+    # 1) i = 0 [0:0+3] [0:3] el 3 no se incluye
+    # 2) i = 3 [3:3+3] [3:6] el 6 no se incluye
 print(lista_C)
