@@ -2,7 +2,7 @@
 #El archivo se puede llamar como quieran.
 
 import os 
-nombreArchivo = 'Tareas-de-T-c.-en-Programaci-n\Archivos\Clase2\TextoEjemplo.txt'
+nombreArchivo = r'Archivos\Clase2\texto_ejemplo.txt'
 if os.path.exists(nombreArchivo):
     print('Archivo abierto')
     archivoAbierto = open(nombreArchivo,'a')
@@ -15,3 +15,4 @@ archivoAbierto = open(nombreArchivo,'r')
 contenido = archivoAbierto.read()
 archivoAbierto.close()
 print(contenido)
+print('Archivo cerrado')
