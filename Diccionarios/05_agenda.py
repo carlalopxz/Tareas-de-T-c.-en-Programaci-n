@@ -23,7 +23,7 @@ while True:
     def opcion_add_modificar():
         nombre_contacto = input('Ingrese un nombre: \n').capitalize()
         if nombre_contacto in agenda.keys():
-            print(agenda[nombre_contacto])
+            print(f'{nombre_contacto}:{agenda[nombre_contacto]}')
             opcion_modificar = input('Desea modificar el contacto: \n A) SI \n B) NO \n').lower()
             if opcion_modificar[0] != 'n':
                 agenda[nombre_contacto] = int(input('Modifique el contacto: \n'))
@@ -49,7 +49,6 @@ while True:
             if opcion_borrar == 'si':
                 del agenda[nombre_para_borrar]
                 print('Contacto borrado')
-
         else:
             print('No se encontro el contacto')
 
