@@ -1,0 +1,6 @@
+Este es un texto ejemplo
+Para practicar el write del tema de Archivos
+Fin. 
+Este es un texto para practicar
+la sobreescritra en los Archivos.
+Fin.
