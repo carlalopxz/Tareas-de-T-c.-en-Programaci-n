@@ -11,4 +11,7 @@ En este repositorio voy a poner todas las tareas que vaya haciendo con el curso 
 - Diccionarios
 - Manipulación de cadenas
 - Archivos
-- 
+- Organización de Archivos 
+- Depuracion de Codigo 
+- Web Scraping 
+- Planillas de calculo  
