@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "d:\repositorios\tecnicas_en_programacion\Depuracion Codigo\04_traceback.py", line 5, in <module>
+    divisionPorCero = 2/ 0
+ZeroDivisionError: division by zero
