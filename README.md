@@ -2,7 +2,7 @@
 
 En este repositorio voy a poner todas las tareas que vaya haciendo con el curso de **Técnicas en Programación** con Python3.
 
-**PLAN DE ESTUDIOS**
+**PLAN DE ESTUDIOS - TECNICAS EN PROGRAMACION**
 - Variables
 - Condicionales
 - Bucles y ciclos de repetición 
