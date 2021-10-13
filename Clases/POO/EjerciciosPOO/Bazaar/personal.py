@@ -31,20 +31,38 @@ class Personal():
 class empleadoMostrador(Personal):
     def __init__(self, nombre, apellido, dni, sueldo, comision):
         super().__init__(nombre, apellido, dni, sueldo, comision)
-
+        self.__caja = 5000
+    #Getters
+    def get_caja(self):
+        return self.__caja
     #Metodos
     def cobrar(self,articulo):
-        pass
-    def sumarDineroCaja(self,articulo):
-        pass
-    def restarDineroCaja(self):
-        pass
+        self.__caja += articulo.get_precioArt()
 
 class empleadoComun(Personal):
     def __init__(self, nombre, apellido, dni, sueldo, comision):
         super().__init__(nombre, apellido, dni, sueldo, comision)
     #Metodos
-    def venderArticulos(self,articulo):
-        pass
-    def generarComision(self,articulo):
-        pass
+    def venderArticulo(self,bazaar,articulo):
+        bazaar.eliminarArticulo(articulo)
+        self.set_comision(articulo.get_precioArt()*0.10)
+        print(f"Articulo vendido: {articulo.get_nombreArt()}")
+        print(f"Precio del articulo: {articulo.get_precioArt()}")
+        print(f"Stock disponible: {bazaar.stock()}")
+
+class Repositor(Personal):
+    def __init__(self, nombre, apellido, dni, sueldo, comision):
+        super().__init__(nombre, apellido, dni, sueldo, comision)
+        self.__mercaderia = []
+
+    def irDeposito(self,articulo,bazaar):
+        self.__mercaderia.append(articulo)
+        bazaar.agregarArticulo(articulo)
+        self.__mercaderia.remove(articulo)
+
+class Coordinador(Personal):
+    def __init__(self, nombre, apellido, dni, sueldo, comision):
+        super().__init__(nombre, apellido, dni, sueldo, comision)
+    
+    def coordinarEmpleados(self):
+        print("Coordinado ue")

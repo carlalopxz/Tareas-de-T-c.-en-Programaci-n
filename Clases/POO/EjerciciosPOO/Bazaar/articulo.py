@@ -1,4 +1,6 @@
-class Articulo():
+from abc import ABC, abstractmethod
+
+class Articulo(ABC):
     def __init__(self, nombreArticulo,precioArticulo):
         self.__nombreArticulo = nombreArticulo
         self.__precioArticulo = precioArticulo
@@ -13,6 +15,10 @@ class Articulo():
         self.__nombreArticulo = nombre
     def set_precioArt(self,precio):
         self.__precioArticulo = precio
+    #Metodos 
+    @abstractmethod
+    def mostrarArticulos(self):
+        pass
 
 class ArticuloJardin(Articulo):
     def __init__(self, nombreArticulo, precioArticulo,esProfesional):
@@ -24,6 +30,9 @@ class ArticuloJardin(Articulo):
     #Setter
     def set_esProfesional(self,esProfesional):
         self.__esProfesional = esProfesional
+    #Metodos
+    def mostrarArticulos(self):
+        print(f"Nombre: {self.get_nombreArt()}\nPrecio: {self.get_precioArt()}\nEs profesiona: {self.get_esProfesional()}")
 
 class Juguete(Articulo):
     def __init__(self, nombreArticulo, precioArticulo,edadRecomendada):
@@ -35,6 +44,9 @@ class Juguete(Articulo):
     #Setters
     def set_edadRecomendada(self,edadNueva):
         self.__edadRecomendada = edadNueva
+    #Metodos
+    def mostrarArticulos(self):
+        print(f"Nombre: {self.get_nombreArt()} \nPrecio: {self.get_precioArt()}\nEdad recomendada: {self.get_edadRecomendada()}")
     
 class Vajilla(Articulo):
     def __init__(self, nombreArticulo, precioArticulo,matConfeccion,tipoVajilla):
@@ -51,4 +63,7 @@ class Vajilla(Articulo):
         self.__matConfeccion = materialNuevo
     def set_tipoVajilla(self,tipoNuevo):
         self.__tipoVajilla = tipoNuevo
+    #Metodos
+    def mostrarArticulos(self):
+        print(f"Nombre: {self.get_nombreArt()}\nPrecio: {self.get_precioArt()}\nMaterial de Confeccion: {self.get_matConfeccion()}\nTipo de Vajilla: {self.get_tipoVajilla()}")
     
