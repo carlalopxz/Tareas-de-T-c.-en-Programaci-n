@@ -1,40 +1,48 @@
 /*EJERCICIO 1*/
 
-SELECT precio,
+SELECT nombre,precio,
 CASE
 	WHEN precio >= 10000 THEN "MUY COSTOSO"
 	WHEN precio >= 5000 THEN "COSTOSO"
 	ELSE "NORMAL"
-END
+END AS "CLASIFICACION"
 FROM productos;
 
 /*EJERCICIO 2*/
 
-SELECT puntuacion,
+SELECT nombre,
 CASE
-	WHEN puntuacion >= 8 THEN "MUY BUENO"
-	WHEN puntuacion >= 6 THEN "BUENO"
+	WHEN puntuacion >= 4 THEN "MUY BUENO"
+	WHEN puntuacion >= 2 THEN "BUENO"
 	ELSE "REGULAR"
-END
+END AS "CLASIFICACION" 
 FROM productos;
 
 /*EJERCICIO 3*/
 
-SELECT Apellido, Salario,Oficio, DATE_FORMAT(Fecha_Alt, "%d-%m-%Y") AS "FECHA DE ALTA",
+SELECT Apellido, Salario,Oficio, DATE_FORMAT(Fecha_Alt, "%d-%m-%Y") AS "FECHA DE ALTA", Dept_no,
 CASE
 	WHEN (emp.Dept_No = 10) OR (emp.Dept_No = 30) THEN "DEPARTAMENTO ELIMINADO"
 	ELSE "NO SE ELIMINA"
-END
+END AS "DEPARTAMENTO"
 FROM emp;
+
+SELECT Apellido, Salario,Oficio, DATE_FORMAT(Fecha_Alt, "%d-%m-%Y") AS "FECHA DE ALTA",Dept_no,
+CASE
+	WHEN Dept_no IN(10,30) THEN "DEPARTAMENTO ELIMINADO"
+	ELSE "NO SE ELIMINA"
+END AS "DEPARTAMENTO"
+FROM emp;
+
 
 /*EJERCICIO 4*/
 
-SELECT A.Apellido AS "APELLIDO",A.Salario AS "SALARIO EMP",
+SELECT A.Apellido AS "APELLIDO",A.Salario AS "SALARIO",
 CASE
-	WHEN (A.Salario AND A.Salario) < 100000 THEN "SE SUBE SUELDO"
-	WHEN 100000 <= (A.Salario AND A.Salario) >= 250000 THEN "MANTENEMOS SALARIO" 
+	WHEN A.Salario < 100000 THEN "SE SUBE SUELDO"
+	WHEN 100000 <= A.Salario >= 250000 THEN "MANTENEMOS SALARIO" 
 	ELSE "SE BAJA SALARIO"
-END
+END AS "DECISION SALARIO"
 FROM (SELECT Apellido, Salario FROM emp UNION ALL SELECT Apellido,Salario FROM plantilla)A;
 
 /*EJERCICIO 5*/
@@ -48,4 +56,26 @@ END
 FROM plantilla;
 
 /*EJERCICIO 6*/       
+/*DATE_FORMAT(STR_TO_DATE(Fecha_Nac, "%d-%b-%Y"),'%Y')*/
+SELECT Apellido,Direccion, STR_TO_DATE(Fecha_Nac, "%d-%b-%Y") FROM enfermo;
+
+SELECT CONCAT(DATE_FORMAT(Fecha_Nac,'%d-'),
+CASE 
+	WHEN MONTH(Fecha_Nac) = "ene" THEN 
+
+)
+
+
+
+SELECT 
+CONCAT(
+DATE_FORMAT(Fecha_Nac, '%d'), " ",(
+CASE
+WHEN DATE_FORMAT(Fecha_Nac, '%b') = 'ene' THEN 'jan'
+WHEN DATE_FORMAT(Fecha_Nac, '%b') = 'dic' THEN 'dec'
+END), " ",
+DATE_FORMAT(Fecha_Nac, '%Y'))
+FROM enfermo;
+
+
 

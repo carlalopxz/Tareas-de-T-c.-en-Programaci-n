@@ -89,4 +89,14 @@ class Usuario():
         print(baseDeDatos.rowcount, "record inserted.")
     
     def eliminar(self,usuario):
-        pass
+        mydb = mysql.connector.connect(
+            host="127.0.0.1",
+            user="root",
+            password="",
+            database="python")
+        baseDeDatos = mydb.cursor()
+        sql = "DELETE FROM contactos WHERE id = %s AND nombre = %s AND email = %s AND celular = %s"
+        val = (f"{usuario.get_id()}",f"{usuario.get_nombre()}", f"{usuario.get_mail()}",f"{str(usuario.get_celular().get_numero())}")
+        baseDeDatos.execute(sql,val)
+        mydb.commit()
+        print(baseDeDatos.rowcount, "record(s) deleted")
