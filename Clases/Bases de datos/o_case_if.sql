@@ -1,0 +1,51 @@
+/*EJERCICIO 1*/
+
+SELECT precio,
+CASE
+	WHEN precio >= 10000 THEN "MUY COSTOSO"
+	WHEN precio >= 5000 THEN "COSTOSO"
+	ELSE "NORMAL"
+END
+FROM productos;
+
+/*EJERCICIO 2*/
+
+SELECT puntuacion,
+CASE
+	WHEN puntuacion >= 8 THEN "MUY BUENO"
+	WHEN puntuacion >= 6 THEN "BUENO"
+	ELSE "REGULAR"
+END
+FROM productos;
+
+/*EJERCICIO 3*/
+
+SELECT Apellido, Salario,Oficio, DATE_FORMAT(Fecha_Alt, "%d-%m-%Y") AS "FECHA DE ALTA",
+CASE
+	WHEN (emp.Dept_No = 10) OR (emp.Dept_No = 30) THEN "DEPARTAMENTO ELIMINADO"
+	ELSE "NO SE ELIMINA"
+END
+FROM emp;
+
+/*EJERCICIO 4*/
+
+SELECT A.Apellido AS "APELLIDO",A.Salario AS "SALARIO EMP",
+CASE
+	WHEN (A.Salario AND A.Salario) < 100000 THEN "SE SUBE SUELDO"
+	WHEN 100000 <= (A.Salario AND A.Salario) >= 250000 THEN "MANTENEMOS SALARIO" 
+	ELSE "SE BAJA SALARIO"
+END
+FROM (SELECT Apellido, Salario FROM emp UNION ALL SELECT Apellido,Salario FROM plantilla)A;
+
+/*EJERCICIO 5*/
+
+SELECT T AS "TURNO",
+CASE
+	WHEN T = "N" THEN "NOCHE"
+	WHEN T = "M" THEN "MAÑANA"
+	ELSE "TARDE"
+END	
+FROM plantilla;
+
+/*EJERCICIO 6*/       
+
