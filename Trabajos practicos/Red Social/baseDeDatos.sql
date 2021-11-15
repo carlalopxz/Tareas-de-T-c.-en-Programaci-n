@@ -1,0 +1,123 @@
+/*CREACION DE TABLAS DE LA BASE DE DATOS*/
+
+/*CREACION TABLA SENTIMENTAL*/
+
+CREATE TABLE sentimental(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(30) NOT NULL 
+);
+
+/*CREACION TABLA PAIS*/
+
+CREATE TABLE pais(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL 
+);
+
+/*CREACION TABLA PROVINCIA*/
+
+CREATE TABLE provincia(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50),
+	pais_ID INT,
+	FOREIGN KEY (pais_ID) REFERENCES pais(id)
+);
+
+/*CREACION DE TABLA CIUDAD*/
+
+CREATE TABLE ciudad(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50),
+	provincia_ID INT,
+	FOREIGN KEY (provincia_ID) REFERENCES provincia(id)
+);
+
+/*CREACION TABLA TIPO POSTEO*/
+
+CREATE TABLE tipoPosteo(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL 
+);
+
+/*CREACION TABLA POSTEO*/
+
+CREATE TABLE posteo(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	titulo VARCHAR(50) NOT NULL,
+	usuario_ID INT,
+	tipoPosteo_ID INT,
+	/*FOREIGN KEY (usuario_ID) REFERENCES usuario(ID),*/
+	FOREIGN KEY (tipoPosteo_ID) REFERENCES tipoPosteo(ID)
+);
+
+/*CREACION DE TABLA AMIGOS*/
+
+CREATE TABLE amigos(
+	id INT PRIMARY KEY AUTO_INCREMENT
+	/*usuario_ID INT,
+	FOREIGN KEY usuario_ID REFERENCES usuario(id)*/
+);
+
+/*CREACION TABLA USUARIO*/
+
+CREATE TABLE usuario(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL,
+	apellido VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	celular VARCHAR(15),
+	domicilio VARCHAR(50),
+	nombreUsuario VARCHAR(255) NOT NULL,
+	contrasenia VARCHAR(50) NOT NULL,
+	sexo VARCHAR(2),
+	imagenPerfil VARCHAR(255),
+	imagenPortada VARCHAR(255),
+	biografia TEXT,
+	fechaCreacionCuenta DATE NOT NULL,
+	pais_ID INT,
+	sentimental_ID INT,
+	/*tieneAmigos_ID INT,*/
+	FOREIGN KEY (pais_ID) REFERENCES pais(id),
+	FOREIGN KEY (sentimental_ID) REFERENCES sentimental(id)
+	/*FOREIGN KEY tieneAmigos_ID REFERENCES tieneAmigos(id)*/
+);
+
+/*ALTER TABLE EN ALGUNAS TABLAS*/
+
+ALTER TABLE posteo
+	ADD FOREIGN KEY (usuario_ID) REFERENCES usuario(ID);
+	
+ALTER TABLE amigos
+	ADD usuario_ID INT,
+	ADD amigos_ID INT;
+
+ALTER TABLE amigos
+	ADD FOREIGN KEY (usuario_ID) REFERENCES usuario(id),
+	ADD FOREIGN KEY (amigos_ID) REFERENCES usuario(id);
+
+SHOW CREATE TABLE usuario
+	
+ALTER TABLE usuario
+	DROP FOREIGN KEY usuario_ibfk_1;
+
+ALTER TABLE usuario
+	DROP COLUMN pais_ID;
+
+ALTER TABLE usuario
+	DROP COLUMN nombreUsuario,
+	ADD ciudad_ID int,
+	ADD FOREIGN KEY (ciudad_ID) REFERENCES ciudad(id);
+
+ALTER TABLE posteo
+	ADD creacionPosteo DATE;
+	
+ALTER TABLE usuario
+	DROP COLUMN domicilio;
+	
+ALTER TABLE usuario
+	ADD amigos_ID INT,
+	ADD FOREIGN KEY (amigos_ID) REFERENCES amigos(id);
+
+ALTER TABLE usuario
+	DROP FOREIGN KEY usuario_ibfk_4,
+	DROP COLUMN amigos_ID;
