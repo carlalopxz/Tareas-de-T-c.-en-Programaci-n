@@ -1,5 +1,6 @@
 from usuario import Usuario
 from celular import Celular
+from base import BD
 
 celularUno = Celular("Apple","Iphone 6s","Movistar","367492749")
 celularDos = Celular("Motorola","Moto G30","Claro","57648373")
@@ -24,3 +25,5 @@ usuarioDos.guardar(usuarioTres)
 usuarioUno.guardar(usuarioDos)
 print("----Metodo Eliminar----")
 usuarioUno.eliminar(usuarioDos)
+
+celular1 = Celular("Motorola","Moto G30","Claro","11763367467")
