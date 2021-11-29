@@ -18,4 +18,23 @@ class DB():
     def get_cursor(self):
         return self.__cursor
 
+    def selectNombreCiudad(self):
+        sql = 'SELECT nombre FROM ciudad'
+        baseDatos.get_cursor().execute(sql)
+        resultado = baseDatos.get_cursor().fetchall()
+        return resultado
+    
+    def selectIDCiudad(self,nombreCiudad):
+        sql = 'SELECT id FROM ciudad WHERE nombre = %s'
+        val = (nombreCiudad,)
+        baseDatos.get_cursor().execute(sql,val)
+        resultado = baseDatos.get_cursor().fetchall()
+        return resultado
+
+    def selectNombreSentimental(self):
+        sql = 'SELECT nombre FROM sentimental'
+        baseDatos.get_cursor().execute(sql)
+        resultado = baseDatos.get_cursor().fetchall()
+        return resultado
+
 baseDatos = DB()

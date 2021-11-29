@@ -57,25 +57,8 @@ FROM plantilla;
 
 /*EJERCICIO 6*/       
 /*DATE_FORMAT(STR_TO_DATE(Fecha_Nac, "%d-%b-%Y"),'%Y')*/
-SELECT Apellido,Direccion, STR_TO_DATE(Fecha_Nac, "%d-%b-%Y") FROM enfermo;
-
-SELECT CONCAT(DATE_FORMAT(Fecha_Nac,'%d-'),
-CASE 
-	WHEN MONTH(Fecha_Nac) = "ene" THEN 
-
-)
 
 
-
-SELECT 
-CONCAT(
-DATE_FORMAT(Fecha_Nac, '%d'), " ",(
-CASE
-WHEN DATE_FORMAT(Fecha_Nac, '%b') = 'ene' THEN 'jan'
-WHEN DATE_FORMAT(Fecha_Nac, '%b') = 'dic' THEN 'dec'
-END), " ",
-DATE_FORMAT(Fecha_Nac, '%Y'))
-FROM enfermo;
 
 
 
