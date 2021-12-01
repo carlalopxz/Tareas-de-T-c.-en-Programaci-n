@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `amigos` (
   CONSTRAINT `amigos_ibfk_2` FOREIGN KEY (`amigos_ID`) REFERENCES `usuario` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla redsocial.amigos: ~69 rows (aproximadamente)
+-- Volcando datos para la tabla redsocial.amigos: ~68 rows (aproximadamente)
 /*!40000 ALTER TABLE `amigos` DISABLE KEYS */;
 INSERT INTO `amigos` (`id`, `usuario_ID`, `amigos_ID`) VALUES
 	(6, 2, 3),
@@ -132,6 +132,24 @@ INSERT INTO `ciudad` (`id`, `nombre`, `provincia_ID`) VALUES
 	(15, 'Valparaiso', 14);
 /*!40000 ALTER TABLE `ciudad` ENABLE KEYS */;
 
+-- Volcando estructura para vista redsocial.datos_usuarios
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `datos_usuarios` (
+	`nombre` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`apellido` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`Situacion Sentimental` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`Cantidad de amigos` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
+
+-- Volcando estructura para vista redsocial.domicilio_usuarios
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `domicilio_usuarios` (
+	`Nombre usuario` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`Ciudad` VARCHAR(50) NULL COLLATE 'utf8mb4_general_ci',
+	`Provincia` VARCHAR(50) NULL COLLATE 'utf8mb4_general_ci',
+	`Pais` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci'
+) ENGINE=MyISAM;
+
 -- Volcando estructura para tabla redsocial.pais
 CREATE TABLE IF NOT EXISTS `pais` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -174,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `posteo` (
   CONSTRAINT `posteo_ibfk_2` FOREIGN KEY (`usuario_ID`) REFERENCES `usuario` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla redsocial.posteo: ~10 rows (aproximadamente)
+-- Volcando datos para la tabla redsocial.posteo: ~15 rows (aproximadamente)
 /*!40000 ALTER TABLE `posteo` DISABLE KEYS */;
 INSERT INTO `posteo` (`id`, `titulo`, `usuario_ID`, `tipoPosteo_ID`, `creacionPosteo`) VALUES
 	(1, 'Nacimiento', 2, 4, '2021-01-01'),
@@ -193,6 +211,15 @@ INSERT INTO `posteo` (`id`, `titulo`, `usuario_ID`, `tipoPosteo_ID`, `creacionPo
 	(14, 'Mirando una peli!', 12, 10, '2021-05-26'),
 	(15, 'De pase por Tigre!', 2, 10, '2016-10-18');
 /*!40000 ALTER TABLE `posteo` ENABLE KEYS */;
+
+-- Volcando estructura para vista redsocial.posteo_informacion
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `posteo_informacion` (
+	`titulo` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`nombre usuario` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`Tipo de posteo` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`creacionPosteo` DATE NULL
+) ENGINE=MyISAM;
 
 -- Volcando estructura para tabla redsocial.provincia
 CREATE TABLE IF NOT EXISTS `provincia` (
@@ -298,9 +325,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   KEY `ciudad_ID` (`ciudad_ID`),
   CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`sentimental_ID`) REFERENCES `sentimental` (`id`),
   CONSTRAINT `usuario_ibfk_3` FOREIGN KEY (`ciudad_ID`) REFERENCES `ciudad` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla redsocial.usuario: ~11 rows (aproximadamente)
+-- Volcando datos para la tabla redsocial.usuario: ~12 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `email`, `celular`, `contrasenia`, `sexo`, `imagenPerfil`, `imagenPortada`, `biografia`, `fechaCreacionCuenta`, `sentimental_ID`, `ciudad_ID`) VALUES
 	(2, 'Carla', 'Lopez', 'carlalopez@gmail.com', '1139876356', 'perro', 'M', 'URL1', 'URL2', NULL, '2015-05-01', 1, 1),
@@ -313,8 +340,33 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `email`, `celular`, `contrase
 	(9, 'Jesus', 'Aguirre', 'jesusaguirre@hotmail.com', '11873564764', 'peluqueria', 'H', 'URL15', 'URL16', NULL, '2010-08-01', 1, 1),
 	(10, 'Mayra', 'Monteagudo', 'mayra@hotmail.com', '1189765456', 'esculpidas', 'M', 'URL17', 'URL18', NULL, '2015-03-01', 8, 1),
 	(11, 'Celeste', 'Dominguez', 'celesdominguez@hotmail.com', '873876356', 'patines', 'M', 'URL19', 'URL20', NULL, '2015-08-01', 6, 1),
-	(12, 'Cintia', 'Almiron', 'cintiaalmiron@gmail.com', '871342642', 'tortas', 'M', 'URL21', 'URL22', NULL, '2005-04-01', 6, 7);
+	(12, 'Cintia', 'Almiron', 'cintiaalmiron@gmail.com', '871342642', 'tortas', 'M', 'URL21', 'URL22', NULL, '2005-04-01', 6, 7),
+	(13, 'Valeria', 'Acosta', 'valeacosta@gmail.com', '113746553', 'programacion', 'M', 'URL23', 'URL24', NULL, '2021-01-23', 2, 1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+
+-- Volcando estructura para vista redsocial.datos_usuarios
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `datos_usuarios`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `datos_usuarios` AS SELECT usuario.nombre,usuario.apellido,sentimental.nombre AS "Situacion Sentimental", COUNT(amigos.usuario_ID) AS "Cantidad de amigos" 
+FROM usuario
+JOIN sentimental ON sentimental.id = usuario.sentimental_id 
+JOIN amigos ON amigos.usuario_id = usuario.id
+GROUP BY usuario.nombre ;
+
+-- Volcando estructura para vista redsocial.domicilio_usuarios
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `domicilio_usuarios`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `domicilio_usuarios` AS SELECT usuario.nombre AS "Nombre usuario", ciudad.nombre AS "Ciudad", provincia.nombre AS "Provincia", pais.nombre AS "Pais" FROM usuario
+JOIN ciudad ON ciudad.id = usuario.ciudad_ID
+JOIN provincia ON provincia.id = ciudad.provincia_ID
+JOIN pais ON pais.id = provincia.pais_ID ;
+
+-- Volcando estructura para vista redsocial.posteo_informacion
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `posteo_informacion`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `posteo_informacion` AS SELECT posteo.titulo, usuario.nombre AS "nombre usuario", tipoposteo.nombre AS "Tipo de posteo", posteo.creacionPosteo FROM posteo
+JOIN usuario ON usuario.id = posteo.usuario_ID 
+JOIN tipoposteo ON tipoposteo.id = posteo.tipoposteo_id ;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

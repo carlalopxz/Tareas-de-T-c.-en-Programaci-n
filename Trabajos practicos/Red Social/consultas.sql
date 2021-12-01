@@ -114,6 +114,8 @@ FROM posteo
 RIGHT JOIN usuario ON usuario.id = posteo.usuario_ID
 GROUP BY usuario.nombre
 
+/*SUBCONSULTAS*/
+
 SELECT usuario.nombre, sentimental.nombre FROM usuario
 LEFT JOIN sentimental
 ON sentimental.id = usuario.sentimental_ID
@@ -128,5 +130,29 @@ SELECT usuario.nombre AS "Nombre usuario", posteo.titulo AS "Nombre posteo" FROM
 JOIN posteo ON posteo.usuario_ID = usuario.id 
 WHERE YEAR(posteo.creacionPosteo) = (SELECT DISTINCT(YEAR(creacionPosteo)) FROM posteo WHERE YEAR(creacionPosteo) = 2021)
 
+/*VISTAS*/
+
+CREATE VIEW datos_usuarios AS 
+SELECT usuario.nombre,usuario.apellido,sentimental.nombre AS "Situacion Sentimental", COUNT(amigos.usuario_ID) AS "Cantidad de amigos" 
+FROM usuario
+JOIN sentimental ON sentimental.id = usuario.sentimental_id 
+JOIN amigos ON amigos.usuario_id = usuario.id
+GROUP BY usuario.nombre 
 
 
+SELECT * FROM datos_usuarios
+
+CREATE VIEW posteo_informacion as
+SELECT posteo.titulo, usuario.nombre AS "nombre usuario", tipoposteo.nombre AS "Tipo de posteo", posteo.creacionPosteo FROM posteo
+JOIN usuario ON usuario.id = posteo.usuario_ID 
+JOIN tipoposteo ON tipoposteo.id = posteo.tipoposteo_id 
+
+SELECT * FROM posteo_informacion 
+
+CREATE VIEW domicilio_usuarios AS 
+SELECT usuario.nombre AS "Nombre usuario", ciudad.nombre AS "Ciudad", provincia.nombre AS "Provincia", pais.nombre AS "Pais" FROM usuario
+JOIN ciudad ON ciudad.id = usuario.ciudad_ID
+JOIN provincia ON provincia.id = ciudad.provincia_ID
+JOIN pais ON pais.id = provincia.pais_ID
+
+SELECT * FROM domicilio_usuarios 
