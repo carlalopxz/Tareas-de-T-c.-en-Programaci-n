@@ -1,5 +1,3 @@
-import base64
-
 class Usuario():
     def __init__(self,nombre, apellido,email, password, sexo, imagenPerfil,
     imagenPortada,biografia,celular,fechaCreacionCuenta,ciudad,sentimental):
@@ -65,6 +63,3 @@ class Usuario():
         self.__ciudad = ciudad
     def set_sentimental(self,sentimental):
         self.__sentimental = sentimental
-    
-    def __encriptarContrasenia(self,password):
-        return base64.b64encode(password.encode("UTF-8")).decode("UTF-8")

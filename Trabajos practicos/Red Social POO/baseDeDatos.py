@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector,base64
 
 configuracion = {
     "host":"localhost",
@@ -23,7 +23,7 @@ class DB():
         baseDatos.get_cursor().execute(sql)
         resultado = baseDatos.get_cursor().fetchall()
         return resultado
-    
+
     def selectIDCiudad(self,nombreCiudad):
         sql = 'SELECT id FROM ciudad WHERE nombre = %s'
         val = (nombreCiudad,)
@@ -36,5 +36,41 @@ class DB():
         baseDatos.get_cursor().execute(sql)
         resultado = baseDatos.get_cursor().fetchall()
         return resultado
+    
+    def insertUsuario(self,formulario):
+        sql = '''INSERT INTO usuario(nombre,apellido,email,celular,contrasenia,ccontrasenia,
+        sexo,imagenPerfil,imagenPortada,biografia,fechaCreacionCuenta,sentimental_ID,ciudad_ID) 
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+        baseDatos.get_cursor().execute(sql,formulario)
+        baseDatos.get_conexion().commit()
+        resultado = baseDatos.get_cursor().rowcount, "Registro Exitoso!"
+        return resultado
+
+    def selectNombreConEmail(self,correo):
+        sql = 'SELECT nombre,contrasenia FROM usuario where email = %s'
+        val = (correo,)
+        baseDatos.get_cursor().execute(sql,val)
+        resultado = baseDatos.get_cursor().fetchall()
+        return resultado
+
+    def selectNombreConCelular(self,celular):
+        sql = 'SELECT nombre,contrasenia FROM usuario where celular = %s'
+        val = (celular,)
+        baseDatos.get_cursor().execute(sql,val)
+        resultado = baseDatos.get_cursor().fetchall()
+        return resultado
+    
+    def selectEmail(self,key,formulario):
+        sql = "SELECT email FROM usuario WHERE email = %s"
+        val = (formulario[key],)
+        baseDatos.get_cursor().execute(sql,val)
+        return baseDatos.get_cursor().fetchall()
+
+    def selectCelular(self,key,formulario):
+        sql = "SELECT celular FROM usuario WHERE celular = %s"
+        val = (formulario[key],)
+        baseDatos.get_cursor().execute(sql,val)
+        return baseDatos.get_cursor().fetchall()
 
 baseDatos = DB()
+
