@@ -71,6 +71,12 @@ class DB():
         val = (formulario[key],)
         baseDatos.get_cursor().execute(sql,val)
         return baseDatos.get_cursor().fetchall()
+    
+    def selectTodoUsuario(self):
+        sql = 'SELECT * FROM usuario'
+        baseDatos.get_cursor().execute(sql)
+        return baseDatos.get_cursor().fetchall()
 
 baseDatos = DB()
 
+print(baseDatos.selectTodoUsuario())

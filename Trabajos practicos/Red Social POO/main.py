@@ -1,8 +1,14 @@
 from menu_inicial import MenuInicial
-from usuario import Usuario
-
-usuario1 = Usuario(None,None,None,"perro",None,None,None,None,None,None,None,None)
+# from usuario import Usuario
 
 menu = MenuInicial()
 
-menu.menu()
+resultadoMenu = menu.menu()
+
+# if len(list(resultadoMenu.keys())) > 2:
+#     diccionarioMenu = dict(resultadoMenu)
+#     usuario = Usuario(**diccionarioMenu)
+# else:
+#     print('Hola')
+# print(usuario.get_nombre())
+    

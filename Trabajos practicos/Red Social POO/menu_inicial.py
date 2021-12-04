@@ -1,6 +1,6 @@
 from datetime import datetime
 from baseDeDatos import baseDatos
-from menu_usuario import MenuUsuario
+# from menu_usuario import MenuUsuario
 from validador import Validador
 import stdiomask,time
 from validador_logueo import ValidadorLoguin
@@ -12,13 +12,15 @@ class MenuInicial():
     def menu(self):
         opcion = False
         while opcion == False:  
-            option = input("\n\nSeleccione la accion a realizar:\nA) Registrar usuario\nB) Loguearse\nOpción: ").lower()
+            print('\nMENU INICIAL')
+            option = input("\nSeleccione la accion a realizar:\nA) Registrar usuario\nB) Loguearse\nOpción: ").lower()
             if option == "a":
-                self.registrarUsuario()
+                resultado = self.registrarUsuario()
                 opcion = True
             elif option == "b":
-                self.loguearUsuario()
+                resultado = self.loguearUsuario()
                 opcion = True
+            return resultado
 
     def registrarUsuario(self):
         formulario = {
@@ -66,7 +68,8 @@ class MenuInicial():
 
         Validador.validarFormulario(Validador,formulario)
         time.sleep(5) #Espera 10 segundos antes de loguearse 
-        MenuInicial.loguearUsuario()
+        print('\nPantalla de Logueo')
+        MenuInicial.loguearUsuario(self)
         return formulario
 
     def loguearUsuario(self):
@@ -83,15 +86,15 @@ class MenuInicial():
             else:
                 print('Opcion incorrecta, vuelva a intentar.')
             formulario['password'] = (stdiomask.getpass(prompt='Ingrese su contraseña: ',mask='*')).strip()
-            break       
-        resultado = ValidadorLoguin.validarLogueo(ValidadorLoguin,formulario)
-        time.sleep(5)
-        if resultado == True:
-            if opcion == 'a':
-                nombre = baseDatos.selectNombreConEmail(formulario['email'])[0][0]
-                print(f'Hola! {nombre}')
-            if opcion == 'b':
-                nombre = baseDatos.selectNombreConCelular(formulario['celular'])[0][0]
-                print(f'Hola! {nombre}')
-        time.sleep(5)
-        MenuUsuario
+            resultado = ValidadorLoguin.validarLogueo(ValidadorLoguin,formulario)
+            time.sleep(5)
+            if resultado == True:
+                if opcion == 'a':
+                    nombre = baseDatos.selectNombreConEmail(formulario['email'])[0][0]
+                    print(f'\nHola! {nombre}')
+                if opcion == 'b':
+                    nombre = baseDatos.selectNombreConCelular(formulario['celular'])[0][0]
+                    print(f'\nHola! {nombre}')
+            time.sleep(5)
+            return formulario
+        # MenuUsuario
