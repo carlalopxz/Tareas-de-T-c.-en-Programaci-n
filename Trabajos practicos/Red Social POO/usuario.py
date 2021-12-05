@@ -1,3 +1,4 @@
+import base64
 import stdiomask
 from baseDeDatos import baseDatos
 from validador import Validador
@@ -202,16 +203,22 @@ class Usuario():
                 print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!')                         
     
     def modificarPassword(self):
-        formulario = {}
-        formularioMod = {}
-        formulario['password'] = (stdiomask.getpass(prompt='Ingrese su actual password:  ',mask='*')).strip()
-        formularioMod['password'] = (stdiomask.getpass(prompt='Ingrese su nueva password:  ',mask='*')).strip()
-        formularioMod['cpassword'] = (stdiomask.getpass(prompt='Ingrese nuevamente su password:  ',mask='*')).strip()
-        formulario['email'] = (input('Ingrese su correo electronico:  ')).strip()
-        validacionPassVieja = ValidadorLoguin.validarPassword(ValidadorLoguin,formulario)
-        if validacionPassVieja == self.get_password():
-            validarPassNueva = Validador.validarPassword(Validador,'password',formularioMod)
-            print(validarPassNueva)
+        while True:
+            formulario = {}
+            formularioMod = {}
+            formulario['password'] = 'Chico99@'#(stdiomask.getpass(prompt='Ingrese su actual password:  ',mask='*')).strip()
+            formularioMod['password'] = 'Chiquito99@'#(stdiomask.getpass(prompt='Ingrese su nueva password:  ',mask='*')).strip()
+            formularioMod['cpassword'] = 'Chiquito99@'#(stdiomask.getpass(prompt='Ingrese nuevamente su password:  ',mask='*')).strip()
+            formulario['email'] = 'chiquito@gmail.com' #(input('Ingrese su correo electronico:  ')).strip()
+            validacionPassVieja = ValidadorLoguin.validarPassword(ValidadorLoguin,formulario)
+            password = base64.b64decode(self.get_password().encode('UTF-8')).decode('UTF-8')
+            if formulario['email'] == self.get_email():
+                if validacionPassVieja == password:
+                    validarPassNueva = Validador.validarPassword(Validador,'password',formularioMod)
+                    print(baseDatos.modificarUsuarioPass('contrasenia','ccontrasenia',f"'{validarPassNueva[0]}'",'email',f"'{formulario['email']}'"))
+                    break
+            else:
+                print('Estas tratando de modificar un usuario que no te pertenece!')
 
     def bajaUsuario(self):
         pass

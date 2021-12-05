@@ -88,4 +88,14 @@ class DB():
         baseDatos.get_conexion().commit()
         resultado = baseDatos.get_cursor().rowcount, 'Registro afectado!'
         return resultado
+
+    def modificarUsuarioPass(self,campoAMod1,campoAMod2,datoNuevo,campoEmailCel,correoCelUsuario):
+        sql= 'UPDATE usuario SET {} = {}, {} = {} WHERE {} = {}'.format(campoAMod1,datoNuevo,campoAMod2,datoNuevo,campoEmailCel,correoCelUsuario)
+        baseDatos.get_cursor().execute(sql)
+        baseDatos.get_conexion().commit()
+        resultado = baseDatos.get_cursor().rowcount, 'Registro afectado!'
+        return resultado
+
+
+
 baseDatos = DB()
