@@ -25,16 +25,18 @@ class Validador():
             print(f"¡Error! falto completar el '{campo}'")
             formulario[campo] = input(f"Complete el {campo}:  ")
             self.validarCampo(self,campo,formulario)
-
+        return formulario[campo]
+    
     def validarEmail(self,campo,formulario):
         if formulario[campo] == None or formulario[campo] == "":
             print(f"¡Error! falto completar el '{campo}'")
             formulario[campo] = input(f"Complete el {campo}:  ")
-            self.validarCampo(self,campo,formulario)
+            self.validarEmail(self,campo,formulario)
         elif validate_email(formulario[campo], verify=True) == False:
             print("¡Error! su e-mail no tiene formato de e-mail")
             formulario[campo] = input(f"Complete el {campo} (usuario@correo.com):  ")
-            self.validarCampo(self,campo,formulario)
+            self.validarEmail(self,campo,formulario)
+        return formulario[campo]
     
     def validarPassword(self,campo,formulario):
         if formulario[campo] == None or formulario[campo] == "":
@@ -61,7 +63,7 @@ class Validador():
             else:
                 formulario[campo] = base64.b64encode(formulario[campo].encode("UTF-8")).decode("UTF-8")
                 formulario["cpassword"] = base64.b64encode(formulario["cpassword"].encode('UTF-8')).decode('UTF-8')
-
+        return formulario['password'],formulario['cpassword']
     def validarCelular(self,campo,formulario):
         if formulario[campo] == None or formulario[campo] == "":
             print(f"¡Error! falto completar el '{campo}'")
@@ -75,3 +77,4 @@ class Validador():
             print('¡Error! El número debe contener al menos 11 digitos.')
             formulario[campo] = input('Ingrese su numero de celular: ')
             self.validarCelular(self,campo,formulario)
+        return formulario[campo]

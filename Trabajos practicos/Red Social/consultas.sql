@@ -156,3 +156,7 @@ JOIN provincia ON provincia.id = ciudad.provincia_ID
 JOIN pais ON pais.id = provincia.pais_ID
 
 SELECT * FROM domicilio_usuarios 
+ 
+UPDATE usuario
+SET nombre = 'Rami'
+WHERE email= 'ramiro@gmail.com'

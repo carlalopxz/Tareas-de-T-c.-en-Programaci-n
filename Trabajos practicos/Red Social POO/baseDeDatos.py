@@ -73,10 +73,19 @@ class DB():
         return baseDatos.get_cursor().fetchall()
     
     def selectTodoUsuario(self):
-        sql = 'SELECT * FROM usuario'
+        sql = '''SELECT nombre,apellido,email,celular,contrasenia,ccontrasenia,
+        sexo,imagenPerfil,imagenPortada,biografia,fechaCreacionCuenta,sentimental_ID,ciudad_ID FROM usuario'''
         baseDatos.get_cursor().execute(sql)
         return baseDatos.get_cursor().fetchall()
+    def selectIDUsuario(self):
+        sql = '''SELECT MAX(id) FROM usuario'''
+        baseDatos.get_cursor().execute(sql)
+        return baseDatos.get_cursor().fetchall()[0][0] 
 
+    def modificacionUsuario(self,campoAMod,datoNuevo,campoEmailCel,correoCelUsuario):
+        sql = 'UPDATE usuario SET {} = {} WHERE {} = {}'.format(campoAMod,datoNuevo,campoEmailCel,correoCelUsuario)
+        baseDatos.get_cursor().execute(sql)
+        baseDatos.get_conexion().commit()
+        resultado = baseDatos.get_cursor().rowcount, 'Registro afectado!'
+        return resultado
 baseDatos = DB()
-
-print(baseDatos.selectTodoUsuario())

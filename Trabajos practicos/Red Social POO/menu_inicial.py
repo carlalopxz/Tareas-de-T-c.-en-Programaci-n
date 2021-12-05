@@ -1,6 +1,6 @@
 from datetime import datetime
 from baseDeDatos import baseDatos
-# from menu_usuario import MenuUsuario
+from menu_usuario import menu
 from validador import Validador
 import stdiomask,time
 from validador_logueo import ValidadorLoguin
@@ -13,14 +13,20 @@ class MenuInicial():
         opcion = False
         while opcion == False:  
             print('\nMENU INICIAL')
-            option = input("\nSeleccione la accion a realizar:\nA) Registrar usuario\nB) Loguearse\nOpción: ").lower()
+            option = (input('''\nSeleccione la accion a realizar:
+            A) Registrar usuario
+            B) Loguearse
+            Opción: ''').lower()).strip()
             if option == "a":
                 resultado = self.registrarUsuario()
                 opcion = True
+                return resultado
             elif option == "b":
                 resultado = self.loguearUsuario()
                 opcion = True
-            return resultado
+                return resultado
+            else:
+                print('Error, intente nuevamente')
 
     def registrarUsuario(self):
         formulario = {
@@ -75,18 +81,23 @@ class MenuInicial():
     def loguearUsuario(self):
         formulario = { }
         while True:
-            opcion = input('\n\nA) Ingresar con email\nB) Ingresar con celular\nC) Ingresar despues\nOpcion:  ').lower()
+            opcion = input('''
+            A) Ingresar con email
+            B) Ingresar con celular
+            C) Ingresar despues
+            Opcion:  ''').lower()
             if opcion == 'a':
                 formulario['email'] = (input('Ingrese su mail: ')).strip()
+                formulario['password'] = (stdiomask.getpass(prompt='Ingrese su contraseña: ',mask='*')).strip()
             elif opcion == 'b':
                 formulario['celular'] = (input('Ingrese su celular: ')).strip()
+                formulario['password'] = (stdiomask.getpass(prompt='Ingrese su contraseña: ',mask='*')).strip()
             elif opcion == 'c':
                 print('Hasta Pronto')
                 break
             else:
                 print('Opcion incorrecta, vuelva a intentar.')
-            formulario['password'] = (stdiomask.getpass(prompt='Ingrese su contraseña: ',mask='*')).strip()
-            resultado = ValidadorLoguin.validarLogueo(ValidadorLoguin,formulario)
+            resultado = ValidadorLoguin.validarLogueo(ValidadorLoguin,formulario)[0]
             time.sleep(5)
             if resultado == True:
                 if opcion == 'a':
@@ -97,4 +108,4 @@ class MenuInicial():
                     print(f'\nHola! {nombre}')
             time.sleep(5)
             return formulario
-        # MenuUsuario
+        menu.menuUsuario()
