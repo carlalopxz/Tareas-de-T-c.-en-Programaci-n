@@ -123,11 +123,11 @@ class Usuario():
             elif opcion == 'f':
                 self.modificarSexo()
             elif opcion == 'g':
-                pass
+                self.modificarFotoPerfil()
             elif opcion == 'h':
-                pass
+                self.modificarFotoPortada()
             elif opcion == 'i':
-                pass
+                self.modificarBiografia()
             elif opcion == 'j':
                 pass
             elif opcion == 'k':
@@ -243,7 +243,52 @@ class Usuario():
                 break
             else:
                 print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!')    
-            
+
+    def modificarFotoPerfil(self):
+        formularioMod = {}
+        while True:
+            formularioMod['imagenFotoPerfil'] = (input('Ingrese su nueva foto de perfil:  ')).strip()
+            formularioMod['email'] = (input('Ingrese su correo electronico:  ')).strip()
+            formularioMod['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+            listaKeys = list(formularioMod.keys())
+            inputFotoPerfil = Validador.validarCampo(Validador,listaKeys[0],formularioMod)
+            inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)
+            if inputEmail[1] == self.get_email():  
+                print(baseDatos.modificacionUsuario('imagenPerfil',f"'{inputFotoPerfil}'",'email',f"'{inputEmail[1]}'"))
+                break
+            else:
+                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!')                         
+                         
+    def modificarFotoPortada(self):
+        formularioMod = {}
+        while True:
+            formularioMod['imagenFotoPortada'] = (input('Ingrese su nueva foto de portada:  ')).strip()
+            formularioMod['email'] = (input('Ingrese su correo electronico:  ')).strip()
+            formularioMod['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+            listaKeys = list(formularioMod.keys())
+            inputFotoPortada = Validador.validarCampo(Validador,listaKeys[0],formularioMod)
+            inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)
+            if inputEmail[1] == self.get_email():  
+                print(baseDatos.modificacionUsuario('imagenPortada',f"'{inputFotoPortada}'",'email',f"'{inputEmail[1]}'"))
+                break
+            else:
+                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!') 
+
+    def modificarBiografia(self):
+        formularioMod = {}
+        while True:
+            formularioMod['biografia'] = (input('Ingrese su nueva biografia:  ')).strip()
+            formularioMod['email'] = (input('Ingrese su correo electronico:  ')).strip()
+            formularioMod['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+            listaKeys = list(formularioMod.keys())
+            inputbiografia = Validador.validarCampo(Validador,listaKeys[0],formularioMod)
+            inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)
+            if inputEmail[1] == self.get_email():  
+                print(baseDatos.modificacionUsuario('biografia',f"'{inputbiografia}'",'email',f"'{inputEmail[1]}'"))
+                break
+            else:
+                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!') 
+
 
     def bajaUsuario(self):
         pass
