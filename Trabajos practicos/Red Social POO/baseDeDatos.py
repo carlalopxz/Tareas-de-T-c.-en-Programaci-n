@@ -77,6 +77,7 @@ class DB():
         sexo,imagenPerfil,imagenPortada,biografia,fechaCreacionCuenta,sentimental_ID,ciudad_ID FROM usuario'''
         baseDatos.get_cursor().execute(sql)
         return baseDatos.get_cursor().fetchall()
+    
     def selectIDUsuario(self):
         sql = '''SELECT MAX(id) FROM usuario'''
         baseDatos.get_cursor().execute(sql)
