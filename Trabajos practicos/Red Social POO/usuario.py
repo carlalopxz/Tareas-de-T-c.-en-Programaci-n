@@ -7,7 +7,7 @@ from validador_logueo import ValidadorLoguin
 class Usuario():
     def __init__(self,nombre, apellido,email, celular,password, cpassword,sexo, imagenPerfil,
     imagenPortada,biografia,fechaCreacionCuenta,sentimental,ciudad):
-        self.__id = baseDatos.selectIDUsuario() + 1
+        self.__id = baseDatos.selectIDUsuarioMax() + 1
         self.__nombre = nombre
         self.__apellido = apellido
         self.__email = email
@@ -88,12 +88,21 @@ class Usuario():
             F) SALIR!
             Opcion:  ''').lower()).strip()
             if opcion == 'a':
-                self.menuUsuarioModificar(opcion)
-            if opcion == 'f':
+                self.menuUsuarioModificar()
+            elif opcion == 'b':
+                self.menuBaja()
+            elif opcion == 'c':
+                self.agregarAmigo()
+            elif opcion == 'd':
+                self.eliminarAmigo()
+            elif opcion == 'e':
+                self.listadoAmigos()
+            elif opcion == 'f':
                 print('Hasta pronto!')
                 break
-    
-    def menuUsuarioModificar(self,opcion):
+   
+    #MODIFICACION DE DATOS
+    def menuUsuarioModificar(self):
         while True:
             opcion = (input('''\nSeleccione una opcion a modificar:
             A) Nombre
@@ -129,9 +138,9 @@ class Usuario():
             elif opcion == 'i':
                 self.modificarBiografia()
             elif opcion == 'j':
-                pass
+                self.modificarSentimental()
             elif opcion == 'k':
-                pass
+                self.modificarCiudad()
             elif opcion == 'm':
                 print('\n\nHasta pronto!')
                 break
@@ -206,9 +215,9 @@ class Usuario():
         while True:
             formulario = {}
             formularioMod = {}
-            formulario['password'] = 'Chico99@'#(stdiomask.getpass(prompt='Ingrese su actual password:  ',mask='*')).strip()
-            formularioMod['password'] = 'Chiquito99@'#(stdiomask.getpass(prompt='Ingrese su nueva password:  ',mask='*')).strip()
-            formularioMod['cpassword'] = 'Chiquito99@'#(stdiomask.getpass(prompt='Ingrese nuevamente su password:  ',mask='*')).strip()
+            formulario['password'] = (stdiomask.getpass(prompt='Ingrese su actual password:  ',mask='*')).strip()
+            formularioMod['password'] = (stdiomask.getpass(prompt='Ingrese su nueva password:  ',mask='*')).strip()
+            formularioMod['cpassword'] = (stdiomask.getpass(prompt='Ingrese nuevamente su password:  ',mask='*')).strip()
             formulario['email'] = 'chiquito@gmail.com' #(input('Ingrese su correo electronico:  ')).strip()
             validacionPassVieja = ValidadorLoguin.validarPassword(ValidadorLoguin,formulario)
             password = base64.b64decode(self.get_password().encode('UTF-8')).decode('UTF-8')
@@ -289,17 +298,134 @@ class Usuario():
             else:
                 print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!') 
 
+    def modificarSentimental(self):
+        while True:
+            formularioMod = {}
+            formulario = {}
+            print("\nSituacion sentimental:")
+            cont = 1
+            for x in baseDatos.selectNombreSentimental():
+                for y in x:
+                    print(f"\t• {cont}: {y}")
+                cont += 1
+            formulario["sentimental"] = (input("Ingrese el número de su situacion sentimental:  ")).strip()
+            listaKeys = list(formulario.keys())
+            inputSentimental = int(Validador.validarCampo(Validador,listaKeys[0],formulario))
+            formularioMod['email'] = (input('Ingrese su correo electronico:  ')).strip()
+            formularioMod['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+            inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)[1]
+            # print(inputSentimental)
+            if inputEmail == self.get_email():
+                print(baseDatos.modificacionUsuario('sentimental_ID',inputSentimental,'email',f"'{inputEmail}'"))
+                break
+            else:
+                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!') 
+
+    def modificarCiudad(self):
+        while True:
+            formulario = {}
+            formularioMod = {}
+            print("\nCiudad:")
+            cont = 1
+            for x in baseDatos.selectNombreCiudad():
+                for y in x:
+                    print(f"\t• {cont}: {y}")
+                cont += 1
+            formulario["ciudad"] = (input("Ingrese el numero de su ciudad:  ")).strip()
+            listaKeys = list(formulario.keys())
+            inputCiudad = int(Validador.validarCampo(Validador,listaKeys[0],formulario))
+            formularioMod['email'] = (input('Ingrese su mail:  ')).strip()
+            formularioMod['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+            inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)[1]
+            if inputEmail == self.get_email():
+                print(baseDatos.modificacionUsuario('ciudad_ID',inputCiudad,'email',f"'{inputEmail}'"))
+                break
+            else:
+                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!') 
+    
+    #DAR BAJA DE USUARIO
+
+    def menuBaja(self):
+        while True:
+            opcion = input('\n¿Estás seguro que deseas eliminar tu cuenta?\n\t1) Si\n\t2) No\nOpcion:  ')
+            if opcion == '1':
+                self.bajaUsuario()
+            elif opcion == '2':
+                print('Nos vemos pronto!')
+                break
+            else:
+                print('Opcion incorrecta!')
 
     def bajaUsuario(self):
-        pass
+        while True:
+            formulario = {}
+            formulario['email'] = (input('Ingrese su mail:  ')).strip()
+            formulario['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+            validarEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formulario)[1]
+            if validarEmail == self.get_email():
+                print(baseDatos.borrarUsuario(f"'{validarEmail}'"))
+                break
+            else:
+                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!') 
+
+    #AGREGAR AMIGO
 
     def agregarAmigo(self):
-        pass
+        while True:
+            formulario = {}
+            formularioMod = {}
+            cont = 1
+            print('\nAMIGOS PARA AGREGAR:')
+            for x in baseDatos.selectNombreUsuario(f"'{self.get_nombre()}'"):
+                for y in x:
+                    print(f"\t• {cont}: {y}")
+                cont += 1
+            formulario['amigo'] = (input('Ingrese el numero del amigo que quiere ingresar:  ')).strip()
+            listaKeys = list(formulario.keys())
+            inputAmigo = int(Validador.validarCampo(Validador,listaKeys[0],formulario))
+            nombreAmigo = baseDatos.selectNombreUsuario(f"'{self.get_nombre()}'")[inputAmigo-1][0]
+            idUsuarioAmigo = baseDatos.selectIDUsuarioAmigo(f"'{nombreAmigo}'")
+            idUsuario = baseDatos.selectIDUsuarioAct(f"'{self.get_nombre()}'")
+            formularioMod['email'] = (input('Inserte su email:  ')).strip()
+            formularioMod['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+            inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)
+            if inputEmail[1] == self.get_email():  
+                print(baseDatos.insertAmigos(idUsuario,idUsuarioAmigo))
+                break
+            else:
+                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!') 
 
     def eliminarAmigo(self):
-        pass
+        while True:
+            idUsuario = baseDatos.selectIDUsuarioAct(f"'{self.get_nombre()}'")
+            formulario = {}
+            formularioMod = {}
+            cont = 1
+            print('\nAMIGOS DISPONIBLES PARA ELIMINAR:')
+            for x in baseDatos.listaAmigos(idUsuario):
+                for y in x:
+                    print(f"\t• {cont}: {y}")
+                cont += 1
+            formulario['amigo'] = (input('Ingrese el numero del amigo que quiere eliminar:  ')).strip()
+            listaKeys = list(formulario.keys())
+            inputAmigo = int(Validador.validarCampo(Validador,listaKeys[0],formulario))
+            nombreAmigo = baseDatos.listaAmigos(idUsuario)[inputAmigo-1][0]
+            idUsuarioAmigo = baseDatos.selectIDUsuarioAmigo(f"'{nombreAmigo}'")
+            formularioMod['email'] = (input('Inserte su email:  ')).strip()
+            formularioMod['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+            inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)
+            if inputEmail[1] == self.get_email():  
+                print(baseDatos.eliminarAmigo(idUsuario,idUsuarioAmigo))
+                break
+            else:
+                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!')
 
-    def listadoAmigos():
-        pass
-
+    def listadoAmigos(self):
+        idUsuario = baseDatos.selectIDUsuarioAct(f"'{self.get_nombre()}'")
+        cont = 1
+        print('\nAMIGOS:')
+        for x in baseDatos.listaAmigos(idUsuario):
+            for y in x:
+                print(f"\t• {cont}: {y}")
+            cont += 1
 

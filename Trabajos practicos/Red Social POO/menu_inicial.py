@@ -1,6 +1,5 @@
 from datetime import datetime
 from baseDeDatos import baseDatos
-from menu_usuario import menu
 from validador import Validador
 import stdiomask,time
 from validador_logueo import ValidadorLoguin
@@ -63,7 +62,7 @@ class MenuInicial():
             for y in x:
                 print(f"\t• {cont}: {y}")
             cont += 1
-        formulario["sentimental"] = int(input("Ingrese su situacion sentimental:  "))
+        formulario["sentimental"] = int(input("Ingrese el numero de su situacion sentimental:  "))
         print("Ciudad")
         cont = 1
         for x in baseDatos.selectNombreCiudad():
@@ -108,4 +107,3 @@ class MenuInicial():
                     print(f'\nHola! {nombre}')
             time.sleep(5)
             return formulario
-        menu.menuUsuario()

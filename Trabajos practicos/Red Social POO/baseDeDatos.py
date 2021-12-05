@@ -1,4 +1,4 @@
-import mysql.connector,base64
+import mysql.connector
 
 configuracion = {
     "host":"localhost",
@@ -78,7 +78,7 @@ class DB():
         baseDatos.get_cursor().execute(sql)
         return baseDatos.get_cursor().fetchall()
     
-    def selectIDUsuario(self):
+    def selectIDUsuarioMax(self):
         sql = '''SELECT MAX(id) FROM usuario'''
         baseDatos.get_cursor().execute(sql)
         return baseDatos.get_cursor().fetchall()[0][0] 
@@ -97,6 +97,55 @@ class DB():
         resultado = baseDatos.get_cursor().rowcount, 'Registro afectado!'
         return resultado
 
+    def borrarUsuario(self,email):
+        sql = "DELETE FROM usuario WHERE email = {}".format(email)
+        baseDatos.get_cursor().execute(sql)
+        baseDatos.get_conexion().commit()
+        if baseDatos.get_cursor().rowcount == 1:
+            resultado = "Cuenta Eliminada"
+            return resultado
+        else:
+            resultado = 'Ocurrio un problema al eliminar la cuenta!'
+            return resultado
+    
+    def selectNombreUsuario(self,usuarioAct):
+        sql = 'SELECT CONCAT(nombre,SPACE(1),apellido) FROM usuario WHERE nombre <> {}'.format(usuarioAct)
+        baseDatos.get_cursor().execute(sql)
+        return baseDatos.get_cursor().fetchall()
 
+    def selectIDUsuarioAct(self,usuarioAct):
+        sql = 'SELECT id FROM usuario WHERE nombre = {}'.format(usuarioAct)
+        baseDatos.get_cursor().execute(sql)
+        return baseDatos.get_cursor().fetchall()[0][0]
 
+    def selectIDUsuarioAmigo(self,usuarioAmigo):
+        sql = 'SELECT id FROM usuario WHERE CONCAT(nombre,SPACE(1),apellido) = {}'.format(usuarioAmigo)
+        baseDatos.get_cursor().execute(sql)
+        return baseDatos.get_cursor().fetchall()[0][0]
+    
+    def insertAmigos(self,usuarioID, amigoID):
+        sql = 'INSERT INTO amigos (usuario_ID,amigos_ID) VALUES ({},{})'.format(usuarioID,amigoID)
+        baseDatos.get_cursor().execute(sql)
+        baseDatos.get_conexion().commit()
+        if baseDatos.get_cursor().rowcount == 1:
+            resultado = 'Amigo agregado con exito!'
+            return resultado
+
+    def listaAmigos(self,usuarioAct):
+        sql= '''SELECT concat(usuario.nombre, SPACE(1),usuario.apellido) 
+        FROM usuario JOIN amigos ON amigos.amigos_id = usuario.id
+        WHERE amigos.usuario_id = {}'''.format(usuarioAct)
+        baseDatos.get_cursor().execute(sql)
+        return baseDatos.get_cursor().fetchall()
+
+    def eliminarAmigo(self,usuarioID,amigoID):
+        sql = '''DELETE FROM amigos 
+        WHERE usuario_id = {} AND amigos_id = {}'''.format(usuarioID,amigoID)
+        baseDatos.get_cursor().execute(sql)
+        baseDatos.get_conexion().commit()
+        if baseDatos.get_cursor().rowcount == 1:
+            resultado = 'Amigo eliminado!'
+            return resultado
+        else:
+            print('Hubo un problema al eliminar al amigo')
 baseDatos = DB()

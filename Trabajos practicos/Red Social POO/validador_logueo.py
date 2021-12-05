@@ -36,11 +36,20 @@ class ValidadorLoguin():
         return formulario[key]
 
     def validarPassword(self,formulario):
+        password = None
         keys = list(formulario.keys())
         if keys[0] == 'email' or keys[1] == 'email':
-            password = base64.b64decode(baseDatos.selectNombreConEmail(formulario['email'])[0][-1].encode('UTF-8')).decode('UTF-8')
+            if formulario['password'] == '':
+                print('\nContraseña incorrecta, intente nuevamente')
+                formulario['password'] = (stdiomask.getpass(prompt="Ingrese nuevamente la contraseña: \n",mask="*")).strip()
+            else:
+                password = base64.b64decode(baseDatos.selectNombreConEmail(formulario['email'])[0][-1].encode('UTF-8')).decode('UTF-8')
         elif keys[0] == 'celular':
-            password = base64.b64decode(baseDatos.selectNombreConCelular(formulario['celular'])[0][-1].encode('UTF-8')).decode('UTF-8')
+            if formulario['password'] == '':
+                print('\nContraseña incorrecta, intente nuevamente')
+                formulario['password'] = (stdiomask.getpass(prompt="Ingrese nuevamente la contraseña: \n",mask="*")).strip()
+            else:
+                password = base64.b64decode(baseDatos.selectNombreConCelular(formulario['celular'])[0][-1].encode('UTF-8')).decode('UTF-8')
         if password != formulario['password'] or formulario['password'] == '' or formulario['password'] == None:
             print('\nContraseña incorrecta, intente nuevamente')
             formulario['password'] = (stdiomask.getpass(prompt="Ingrese nuevamente la contraseña: \n",mask="*")).strip()

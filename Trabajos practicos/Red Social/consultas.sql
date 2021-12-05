@@ -157,6 +157,5 @@ JOIN pais ON pais.id = provincia.pais_ID
 
 SELECT * FROM domicilio_usuarios 
  
-UPDATE usuario
-SET nombre = 'Rami'
-WHERE email= 'ramiro@gmail.com'
+SELECT id FROM usuario 
+WHERE CONCAT(nombre,SPACE(1),apellido) = 'Valeria Acosta'

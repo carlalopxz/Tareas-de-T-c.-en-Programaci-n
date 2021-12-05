@@ -13,7 +13,7 @@ for x in range(cantidadDeUsuarios):
 
 # print(globals()["usuario1"].get_nombre())
 # print(globals()['usuario1'].get_id())
-globals()['usuario14'].menuUsuarioInicial()
+globals()['usuario1'].menuUsuarioInicial()
 # print(globals()['usuario14'].get_email())
 # print(globals()['usuario14'].get_nombre())
 # print(globals()['usuario14'].get_apellido())
@@ -21,11 +21,3 @@ globals()['usuario14'].menuUsuarioInicial()
 # print(globals()['usuario14'].get_password())
 # print(globals()['usuario14'].get_celular())
 # print(globals()['usuario14'].get_biografia())
-
-# if len(list(resultadoMenu.keys())) > 2:
-#     diccionarioMenu = dict(resultadoMenu)
-#     usuario = Usuario(**diccionarioMenu)
-# else:
-#     print('Hola')
-# print(usuario.get_nombre())
-    
