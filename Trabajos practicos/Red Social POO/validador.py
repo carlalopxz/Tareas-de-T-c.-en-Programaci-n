@@ -22,41 +22,41 @@ class Validador():
 
     def validarCampo(self,campo,formulario):
         if formulario[campo] == None or formulario[campo] == "":
-            print(f"¡Error! falto completar el '{campo}'")
+            print(f"\n¡Error! falto completar el '{campo}'")
             formulario[campo] = input(f"Complete el {campo}:  ")
             self.validarCampo(self,campo,formulario)
         return formulario[campo]
     
     def validarEmail(self,campo,formulario):
         if formulario[campo] == None or formulario[campo] == "":
-            print(f"¡Error! falto completar el '{campo}'")
+            print(f"\n¡Error! falto completar el '{campo}'")
             formulario[campo] = input(f"Complete el {campo}:  ")
             self.validarEmail(self,campo,formulario)
         elif validate_email(formulario[campo], verify=True) == False:
-            print("¡Error! su e-mail no tiene formato de e-mail")
+            print("\n¡Error! su e-mail no tiene formato de e-mail")
             formulario[campo] = input(f"Complete el {campo} (usuario@correo.com):  ")
             self.validarEmail(self,campo,formulario)
         return formulario[campo]
     
     def validarPassword(self,campo,formulario):
         if formulario[campo] == None or formulario[campo] == "":
-            print(f"¡Error! falto completar el '{campo}'")
+            print(f"\n¡Error! falto completar el '{campo}'")
             formulario[campo] = (stdiomask.getpass(prompt="Ingrese su password que contenga al menos una minuscula, una mayuscula y alguno de los siguientes caracteres especiales '$ % # @': \n", mask = "*")).strip()
             formulario["cpassword"] = (stdiomask.getpass(prompt="Ingrese nuevamente la contraseña: \n",mask="*"))
             self.validarPassword(self,campo,formulario)
         elif len(formulario[campo]) < 6:
-            print("¡Error! La contraseña debe tener mas de 6 caracteres.")
+            print("\n¡Error! La contraseña debe tener mas de 6 caracteres.")
             formulario[campo] = (stdiomask.getpass(prompt="Ingrese su password que contenga al menos una minuscula, una mayuscula y alguno de los siguientes caracteres especiales '$ % # @': \n", mask = "*")).strip()
             formulario["cpassword"] = (stdiomask.getpass(prompt="Ingrese nuevamente la contraseña: \n",mask="*"))
             self.validarPassword(self,campo,formulario)
         elif formulario[campo] != formulario["cpassword"]:
-            print("¡Error! Las contraseñas no coinciden.")
+            print("\n¡Error! Las contraseñas no coinciden.")
             formulario[campo] = (stdiomask.getpass(prompt="Ingrese su password que contenga al menos una minuscula, una mayuscula y alguno de los siguientes caracteres especiales '$ % # @': \n", mask = "*")).strip()
             formulario["cpassword"] = (stdiomask.getpass(prompt="Ingrese nuevamente la contraseña: \n",mask="*"))
             self.validarPassword(self,campo,formulario)
         else:
             if re.search('[a-z]',formulario["password"]) == None or re.search('[A-Z]',formulario["password"]) == None or re.search('[0-9]',formulario["password"]) == None or re.search('[$%#@]',formulario["password"])==None:
-                print("¡Error! La contraseña debe tener al menos una minuscula, una mayuscula y algunos de los caracteres especiales '$ % # @'")
+                print("\n¡Error! La contraseña debe tener al menos una minuscula, una mayuscula y algunos de los caracteres especiales '$ % # @'")
                 formulario[campo] = (stdiomask.getpass(prompt="Ingrese de nuevo su password: \n", mask = "*")).strip()
                 formulario["cpassword"] = (stdiomask.getpass(prompt="Ingrese nuevamente la contraseña: \n",mask="*")).strip()
                 self.validarPassword(self,campo,formulario)
@@ -66,15 +66,15 @@ class Validador():
         return formulario['password'],formulario['cpassword']
     def validarCelular(self,campo,formulario):
         if formulario[campo] == None or formulario[campo] == "":
-            print(f"¡Error! falto completar el '{campo}'")
+            print(f"\n¡Error! falto completar el '{campo}'")
             formulario[campo] = input(f"Complete el {campo}:  ")
             self.validarCelular(self,campo,formulario)
         elif formulario[campo].isdigit() == False:
-            print('¡Error! El número contiene al menos una letra.')
+            print('\n¡Error! El número contiene al menos una letra.')
             formulario[campo] = input('Ingrese su numero de celular: ')
             self.validarCelular(self,campo,formulario)
         elif len(formulario[campo]) < 11:
-            print('¡Error! El número debe contener al menos 11 digitos.')
+            print('\n¡Error! El número debe contener al menos 11 digitos.')
             formulario[campo] = input('Ingrese su numero de celular: ')
             self.validarCelular(self,campo,formulario)
         return formulario[campo]

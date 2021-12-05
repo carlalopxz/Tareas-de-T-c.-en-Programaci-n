@@ -121,7 +121,7 @@ class Usuario():
             elif opcion == 'e':
                 self.modificarPassword()
             elif opcion == 'f':
-                pass
+                self.modificarSexo()
             elif opcion == 'g':
                 pass
             elif opcion == 'h':
@@ -219,6 +219,31 @@ class Usuario():
                     break
             else:
                 print('Estas tratando de modificar un usuario que no te pertenece!')
+
+    def modificarSexo(self):
+        while True:
+            formularioMod = {}
+            while True:
+                opcion= (input('\nSeleecione su nuevo sexo:\nA) Hombre\nB) Mujer\nOpcion:  ').lower()).strip()
+                if opcion == 'a':
+                    formularioMod['sexo'] = 'H'
+                    break
+                elif opcion == 'b':
+                    formularioMod['sexo'] = 'M'
+                    break
+                else:
+                    print('\nOpcion incorrecta! ')
+            formularioMod['email'] = (input('Ingrese su email:  ')).strip()
+            formularioMod['password'] =  (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+            listaKeys = list(formularioMod.keys())
+            inputSexo = Validador.validarCampo(Validador,listaKeys[0],formularioMod)
+            inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)
+            if inputEmail[1] == self.get_email():  
+                print(baseDatos.modificacionUsuario('sexo',f"'{inputSexo}'",'email',f"'{inputEmail[1]}'"))
+                break
+            else:
+                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!')    
+            
 
     def bajaUsuario(self):
         pass
