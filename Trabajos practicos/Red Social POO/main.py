@@ -1,23 +1,17 @@
-# from menu_inicial import MenuInicial
+from menu_inicial import MenuInicial
 from baseDeDatos import baseDatos
 from usuario import Usuario
 
-# menuInicial = MenuInicial()
+menuInicial = MenuInicial()
+resultadoMenu = menuInicial.menu()
 
-# resultadoMenu = menuInicial.menu()
-
+# INSTANCIANDO USUARIOS 
 cantidadDeUsuarios = len(baseDatos.selectTodoUsuario())
-
 for x in range(cantidadDeUsuarios):
     globals() [f"usuario{x}"] = Usuario(*(baseDatos.selectTodoUsuario()[x]))
 
-# print(globals()["usuario1"].get_nombre())
-# print(globals()['usuario1'].get_id())
-globals()['usuario1'].menuUsuarioInicial()
-# print(globals()['usuario14'].get_email())
-# print(globals()['usuario14'].get_nombre())
-# print(globals()['usuario14'].get_apellido())
-# print(globals()['usuario14'].get_email())
-# print(globals()['usuario14'].get_password())
-# print(globals()['usuario14'].get_celular())
-# print(globals()['usuario14'].get_biografia())
+print('\n\n--------DATOS DE USUARIO----------')
+print(f'\nNOMBRE: {globals()[f"usuario{cantidadDeUsuarios-1}"].get_nombre()}')
+print(f'APELLIDO: {globals()[f"usuario{cantidadDeUsuarios-1}"].get_apellido()}')
+
+globals()[f'usuario{cantidadDeUsuarios-1}'].menuUsuarioInicial()

@@ -14,6 +14,8 @@ class Validador():
                 self.validarPassword(self,key,formulario)
             elif key == 'celular':
                 self.validarCelular(self,key,formulario)
+            elif key == 'imagenPerfil' or key == 'imagenPortada' or key == 'biografia':
+                self.validarCamposNull(self,key,formulario)
             else:
                  self.validarCampo(self,key,formulario)
         resultado = baseDatos.insertUsuario(tuple(formulario.values()))
@@ -78,3 +80,7 @@ class Validador():
             formulario[campo] = input('Ingrese su numero de celular: ')
             self.validarCelular(self,campo,formulario)
         return formulario[campo]
+    
+    def validarCamposNull(self,campo,formulario):
+        if formulario[campo] == '':
+            formulario[campo] = None

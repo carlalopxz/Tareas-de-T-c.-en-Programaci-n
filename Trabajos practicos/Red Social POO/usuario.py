@@ -401,31 +401,38 @@ class Usuario():
             formulario = {}
             formularioMod = {}
             cont = 1
-            print('\nAMIGOS DISPONIBLES PARA ELIMINAR:')
-            for x in baseDatos.listaAmigos(idUsuario):
-                for y in x:
-                    print(f"\t• {cont}: {y}")
-                cont += 1
-            formulario['amigo'] = (input('Ingrese el numero del amigo que quiere eliminar:  ')).strip()
-            listaKeys = list(formulario.keys())
-            inputAmigo = int(Validador.validarCampo(Validador,listaKeys[0],formulario))
-            nombreAmigo = baseDatos.listaAmigos(idUsuario)[inputAmigo-1][0]
-            idUsuarioAmigo = baseDatos.selectIDUsuarioAmigo(f"'{nombreAmigo}'")
-            formularioMod['email'] = (input('Inserte su email:  ')).strip()
-            formularioMod['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
-            inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)
-            if inputEmail[1] == self.get_email():  
-                print(baseDatos.eliminarAmigo(idUsuario,idUsuarioAmigo))
+            if baseDatos.listaAmigos(idUsuario) == []:
+                print('No tiene amigos para eliminar, puedes agregar amigos!')
                 break
             else:
-                print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!')
+                print('\nAMIGOS DISPONIBLES PARA ELIMINAR:')
+                for x in baseDatos.listaAmigos(idUsuario):
+                    for y in x:
+                        print(f"\t• {cont}: {y}")
+                    cont += 1
+                formulario['amigo'] = (input('Ingrese el numero del amigo que quiere eliminar:  ')).strip()
+                listaKeys = list(formulario.keys())
+                inputAmigo = int(Validador.validarCampo(Validador,listaKeys[0],formulario))
+                nombreAmigo = baseDatos.listaAmigos(idUsuario)[inputAmigo-1][0]
+                idUsuarioAmigo = baseDatos.selectIDUsuarioAmigo(f"'{nombreAmigo}'")
+                formularioMod['email'] = (input('Inserte su email:  ')).strip()
+                formularioMod['password'] = (stdiomask.getpass(prompt="Ingrese la contraseña: \n",mask="*")).strip()
+                inputEmail = ValidadorLoguin.validarLogueo(ValidadorLoguin,formularioMod)
+                if inputEmail[1] == self.get_email():  
+                    print(baseDatos.eliminarAmigo(idUsuario,idUsuarioAmigo))
+                    break
+                else:
+                    print('\nEstás tratando de modificar un usuario que no te pertenece!\nIntente nuevamente!')
 
     def listadoAmigos(self):
         idUsuario = baseDatos.selectIDUsuarioAct(f"'{self.get_nombre()}'")
         cont = 1
-        print('\nAMIGOS:')
-        for x in baseDatos.listaAmigos(idUsuario):
-            for y in x:
-                print(f"\t• {cont}: {y}")
-            cont += 1
+        if baseDatos.listaAmigos(idUsuario) == [] :
+            print('\nNo tienes amigos! Puedes agregarlos!')
+        else:
+            print('\nAMIGOS:')
+            for x in baseDatos.listaAmigos(idUsuario):
+                for y in x:
+                    print(f"\t• {cont}: {y}")
+                cont += 1
 

@@ -51,9 +51,9 @@ class MenuInicial():
         formulario["password"] = (stdiomask.getpass(prompt="Ingrese su password que contenga al menos una minuscula, una mayuscula y alguno de los siguientes caracteres especiales '$ % # @': \n", mask = "*")).strip()
         formulario["cpassword"] = (stdiomask.getpass(prompt="Ingrese nuevamente la contraseña: \n",mask="*"))
         formulario["sexo"] = (input("Ingrese el sexo del usuario (H - M):  ").upper()).strip()
-        formulario["imagenPerfil"] = (input("Ingrese la foto de perfil (URL): ").lower()).strip()
-        formulario["imagenPortada"] = (input("Ingrese la imagen de portada (URL):  ").lower()).strip()
-        formulario["biografia"] = (input("Ingrese la biografia (NULL para agregar despues):  ").capitalize()).strip()
+        formulario["imagenPerfil"] = (input("Ingrese la foto de perfil (enter para agregar despues): ").lower()).strip()
+        formulario["imagenPortada"] = (input("Ingrese la imagen de portada (enter para agregar despues):  ").lower()).strip()
+        formulario["biografia"] = (input("Ingrese la biografia (enter para apregar despues):  ").capitalize()).strip()
         formulario["fechaCreacionCuenta"] = (f"{datetime.now().year}-{datetime.now().month}-{datetime.now().day}")
         
         print("Situacion sentimental:")
