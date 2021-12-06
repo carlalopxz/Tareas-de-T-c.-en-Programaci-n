@@ -30,7 +30,6 @@ class ValidadorLoguin():
                 print('\nEste correo no existe en nuestra base de datos.')
                 formulario[key] = (input("Intente de nuevo con su correo:  ")).strip()
                 formulario['password'] =(stdiomask.getpass(prompt="Ingrese nuevamente la contraseña: \n",mask="*")).strip()
-                print(formulario) #{'nombre': '','email': '','password': ''}
                 self.validarPassword(self,formulario)
                 self.validarEmail(self,key,formulario)
         return formulario[key]
